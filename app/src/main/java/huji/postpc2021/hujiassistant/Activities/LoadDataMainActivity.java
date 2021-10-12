@@ -26,6 +26,7 @@ public class LoadDataMainActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = db.getUsersAuthenticator().getCurrentUser();
         // Update current language
+        db.logoutUser();
         setLocale(db.loadLocale());
 
         // update UI when DB finish to load the initial data
