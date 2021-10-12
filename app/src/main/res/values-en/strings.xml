@@ -51,7 +51,7 @@
     <string name="new_pass_is_not_equal_to_repeat_pass">Please repeat the new password accurately</string>
     <string name="upload_pictures_button">Uploading summaries</string>
     <string name="enter_course_number">Enter a course number</string>
-    <string name="show_attendance">View attendance list</string>
+    <string name="show_attendance">Attendance list</string>
     <string name="change_language">הגדרות שפה</string>
     <string name="next">Next</string>
     <string name="registration_process_description">System Registration Screen - Step 1 of 3</string>
@@ -85,7 +85,7 @@
     <string name="added_to_the_list_of_courses">Was added to the list of courses</string>
     <string name="exists_in_the_list_of_courses">Already exists in the list of courses</string>
     <string name="removed_from_the_list_of_courses">Was removed from the list of courses</string>
-    <string name="showFilesBtn">Show uploaded files</string>
+    <string name="showFilesBtn">Show files</string>
     <string name="email_not_valid_message">Invalid email address</string>
     <string name="email_field">mail address</string>
     <string name="user_first_name_field">First name</string>
@@ -127,7 +127,7 @@
     <string name="user_exist">Existing user</string>
     <string name="new_user">New user</string>
     <string name="schedule_plan">Schedule</string>
-    <string name="editing_personal_details">Editing personal details</string>
+    <string name="editing_personal_details">Edit personal info</string>
     <string name="curriculum_planning">Curriculum planning</string>
     <string name="my_courses">My courses</string>
     <string name="please_enter_password_msg">Please enter a password of at least 8 characters</string>
