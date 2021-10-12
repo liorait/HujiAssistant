@@ -299,7 +299,6 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                     line = bufferedReader.readLine();
                 } // end of while loop
 
-                System.out.println("got all maslulim for chug: " + chugId);
                 chugMaslulHashMap.put(uploadChug, (ArrayList<UploadMaslul>) maslulimInCurrChug.clone());
                 maslulimInCurrChug.clear();
 
@@ -308,7 +307,6 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
             } // end of uploadChugs for loop
 
         } // end of faculties for loop
-        System.out.println("gets all maslulim for all faculties");
     }
 
     private void getCoursesData() throws IOException, InterruptedException, ExecutionException {
@@ -461,7 +459,6 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                         line = bufferedReader.readLine();
                     } // end of reading line while loop
 
-                    System.out.println("gets all course to maslul to: " + chugId + " -> " + maslulId);
                     maslulCourseHashMap.put(currUploadMaslul, (ArrayList<UploadCourse>) coursesInCurrMaslul.clone());
                     coursesInCurrMaslul.clear();
 
@@ -479,7 +476,6 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
 
             uploadChugs.removeAll(nonRelevanteUploadChugs);
             nonRelevanteUploadChugs.clear();
-            System.out.println("finished faculty: " + facultyId);
 
         } // end of for Faculty loop
     }

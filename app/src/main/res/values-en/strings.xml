@@ -63,7 +63,6 @@
     <string name="login_screen">Login screen</string>
     <string name="logout_textview">Logout</string>
 
-
     <string name="nameOfStudentMyCoursesScreen">Name of student: </string>
     <string name="nameOfFacultyMyCoursesScreen">Name of faculty: </string>
     <string name="nameOfChugMyCoursesScreen">Name of department: </string>

@@ -209,7 +209,6 @@ public class StudentInfo {
 
     public void printCourses(){
         for (String id: this.courses){
-            System.out.println("course3: " + id);
         }
     }
 

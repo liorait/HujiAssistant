@@ -122,7 +122,6 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
             });
         }
         catch(Exception e){
-            Log.i("ERROR", "error loading data from firebase");
         }
 
         logoutImageView = findViewById(R.id.logoutImageView);
@@ -501,7 +500,6 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                         });
             }
             catch (Exception e){
-                Log.i("ERROR_CHUG", "couldn't get chug");
             }
         }
     }
