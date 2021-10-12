@@ -35,7 +35,7 @@
 
 </activity>
 
-    <provider android:name="androidx.core.content.FileProvider" android:grantUriPermissions="true" android:exported="false" android:authorities="com.example.android.fileprovider">
+    <provider android:name="androidx.core.content.FileProvider" android:grantUriPermissions="true" android:exported="false" android:authorities="huji.postpc2021.hujiassistant.fileprovider">
 
     <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
 

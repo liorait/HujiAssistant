@@ -322,33 +322,32 @@ public class PlanCoursesFragment extends Fragment {
 
     //  for now the screen orientation is disabled, when it will be implemented all over the app
     //  re enabled these two method and fix if needed.
-//    @RequiresApi(api = Build.VERSION_CODES.N)
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        System.out.println("-------------------------- came back");
-//
-//        if (dataBase == null) {
-//            dataBase = HujiAssistentApplication.getInstance().getDataBase();
-//        }
-//
-//        if (sp == null){
-//            sp = dataBase.getSp();
-//        }
-//
-//        ArrayAdapter arrayYearAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.yearArray));
-//        arrayYearAdapter.getFilter().filter("");
-//        binding.autocompletechooseyear.setAdapter(arrayYearAdapter);
-//
-//        ArrayAdapter arraySemesterAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.semesterArray));
-//        arraySemesterAdapter.getFilter().filter("");
-//        binding.autocompletechoosesemester.setAdapter(arraySemesterAdapter);
-//
-//        ArrayAdapter arrayPointsAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.pointsArray));
-//        arrayPointsAdapter.getFilter().filter("");
-//        binding.autocompletechoosepoints.setAdapter(arrayPointsAdapter);
-//
-//
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (dataBase == null) {
+            dataBase = HujiAssistentApplication.getInstance().getDataBase();
+        }
+
+        if (sp == null){
+            sp = dataBase.getSp();
+        }
+
+        ArrayAdapter arrayYearAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.yearArray));
+        arrayYearAdapter.getFilter().filter("");
+        binding.autocompletechooseyear.setAdapter(arrayYearAdapter);
+
+        ArrayAdapter arraySemesterAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.semesterArray));
+        arraySemesterAdapter.getFilter().filter("");
+        binding.autocompletechoosesemester.setAdapter(arraySemesterAdapter);
+
+        ArrayAdapter arrayPointsAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.pointsArray));
+        arrayPointsAdapter.getFilter().filter("");
+        binding.autocompletechoosepoints.setAdapter(arrayPointsAdapter);
+
+
 //        String year_text_to_save = sp.getString("year text to save", "");
 //        String semester_text_to_save = sp.getString("semester text to save", "");
 //        String point_text_to_save = sp.getString("point text to save", "");
@@ -383,7 +382,7 @@ public class PlanCoursesFragment extends Fragment {
 //        if (showOnlyChosePlanned_CheckBox.isChecked()) { // check if onlyShowPlaned is clicked, and if so response accordingly
 //            showOnlyPlanedLogic();
 //        }
-//    }
+    }
 //
 //    @Override
 //    public void onSaveInstanceState(@NonNull Bundle outState) {
