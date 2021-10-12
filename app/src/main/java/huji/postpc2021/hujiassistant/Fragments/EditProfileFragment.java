@@ -1,7 +1,7 @@
 package huji.postpc2021.hujiassistant.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,13 +156,13 @@ public class EditProfileFragment extends Fragment {
                                                 userRepeatPassword.setText("");
                                                 oldPassword.setText("");
                                             } else {
-                                                Log.d(TAG, "Error password not updated");
+//                                                Log.d(TAG, "Error password not updated");
                                                 Toast.makeText(getActivity(), R.string.password_failed_to_update_message, Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
                                 } else {
-                                    Log.d(TAG, "Error auth failed");
+//                                    Log.d(TAG, "Error auth failed");
                                     Toast.makeText(getActivity(), R.string.incorrect_old_password, Toast.LENGTH_LONG).show();
                                 }
                             }

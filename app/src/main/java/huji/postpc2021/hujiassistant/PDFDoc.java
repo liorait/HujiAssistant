@@ -3,7 +3,7 @@ package huji.postpc2021.hujiassistant;
 public class PDFDoc {
     String name, path, id;
 
-    public PDFDoc(){
+    public PDFDoc() {
 
     }
 

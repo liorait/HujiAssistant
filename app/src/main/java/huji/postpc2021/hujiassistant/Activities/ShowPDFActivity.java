@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import huji.postpc2021.hujiassistant.PDFCustomerAdapter;
 import huji.postpc2021.hujiassistant.PDFDoc;
 import huji.postpc2021.hujiassistant.R;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,7 +55,7 @@ public class ShowPDFActivity extends AppCompatActivity {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String course = dataSnapshot.getKey();
                     assert course != null;
                     PDFDoc pdfDoc = new PDFDoc();
@@ -76,11 +77,11 @@ public class ShowPDFActivity extends AppCompatActivity {
         int stage = adapter.getStage();
         String savedCourse = adapter.getSavedCourse();
 
-        if (stage == COURSES_PREVIEW){
+        if (stage == COURSES_PREVIEW) {
             super.onBackPressed();
         }
         // Go back to courses preview
-        else if (stage == YEAR_PREVIEW){
+        else if (stage == YEAR_PREVIEW) {
             adapter = new PDFCustomerAdapter(this, PDFList, COURSES_PREVIEW, "");
             recyclerView.setAdapter(adapter);
             PDFList = new ArrayList<>();
@@ -89,7 +90,7 @@ public class ShowPDFActivity extends AppCompatActivity {
             root.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String course = dataSnapshot.getKey();
                         assert course != null;
                         PDFDoc pdfDoc = new PDFDoc();
@@ -107,7 +108,7 @@ public class ShowPDFActivity extends AppCompatActivity {
         }
 
         // Go back to years preview
-        else if (stage == DOCUMENTS_PREVIEW){
+        else if (stage == DOCUMENTS_PREVIEW) {
             adapter = new PDFCustomerAdapter(this, PDFList, YEAR_PREVIEW, savedCourse);
             recyclerView.setAdapter(adapter);
             PDFList = new ArrayList<>();

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class PlanCourseItemHolder extends RecyclerView.ViewHolder  {
+public class PlanCourseItemHolder extends RecyclerView.ViewHolder {
 
     protected ArrayList<Course> coursesList;
 

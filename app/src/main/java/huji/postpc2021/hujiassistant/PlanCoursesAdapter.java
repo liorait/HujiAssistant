@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,7 +176,7 @@ public class PlanCoursesAdapter extends RecyclerView.Adapter<PlanCourseItemHolde
                             }
                         });
             } catch (Exception e) {
-                Log.i("ERROR", "failed to get kdam courses");
+//                Log.i("ERROR", "failed to get kdam courses");
             }
 
             holder.checkBox.setOnClickListener(v -> {
@@ -228,12 +228,12 @@ public class PlanCoursesAdapter extends RecyclerView.Adapter<PlanCourseItemHolde
         }
     }
 
-        public int getItemCount () {
-            return this.list.size();
-        }
-
-        public ArrayList<Course> getItems () {
-            return list;
-        }
+    public int getItemCount() {
+        return this.list.size();
     }
+
+    public ArrayList<Course> getItems() {
+        return list;
+    }
+}
 

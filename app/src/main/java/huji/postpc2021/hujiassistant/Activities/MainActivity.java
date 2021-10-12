@@ -34,16 +34,17 @@ import huji.postpc2021.hujiassistant.HujiAssistentApplication;
 import huji.postpc2021.hujiassistant.LocalDataBase;
 import huji.postpc2021.hujiassistant.R;
 import huji.postpc2021.hujiassistant.Fragments.RegisterFragment;
+
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public interface PopUpInterface
-    {
+    public interface PopUpInterface {
         public String grade(String grade);
     }
+
     private DrawerLayout moreInfoDrawerLayout;
     public LocalDataBase dataBase = null;
     String grade;
@@ -123,12 +124,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onContinueButtonClick() {
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(
-                                  R.anim.fade_in,  // enter
-                                 R.anim.slide_out,  // exit
-                                 R.anim.slide_in,   // popEnter
-                                 R.anim.fade_out  // popExit
-                          )
-                                 .replace(loginFragment.getId(), infoFragment).addToBackStack(null).commit();
+                        R.anim.fade_in,  // enter
+                        R.anim.slide_out,  // exit
+                        R.anim.slide_in,   // popEnter
+                        R.anim.fade_out  // popExit
+                )
+                        .replace(loginFragment.getId(), infoFragment).addToBackStack(null).commit();
             }
         };
 
@@ -179,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(editIntent);
             }
         };
-
 
 
         coursesFragment.onCheckBoxClickListener = new CoursesAdapter.OnCheckBoxClickListener() {
@@ -273,10 +273,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mbuilder.setSingleChoiceItems(listItems, languageIndex, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == 0){
+                if (which == 0) {
                     setLocale("en");
-                }
-                else if (which == 1){
+                } else if (which == 1) {
                     setLocale("he");
                 }
 

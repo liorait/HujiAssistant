@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CourseItemHolder extends RecyclerView.ViewHolder  {
+public class CourseItemHolder extends RecyclerView.ViewHolder {
 
     protected ArrayList<Course> coursesList;
 

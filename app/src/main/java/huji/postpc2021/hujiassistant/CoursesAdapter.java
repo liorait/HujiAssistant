@@ -25,14 +25,16 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import huji.postpc2021.hujiassistant.Activities.MainScreenActivity;
+
 import com.tooltip.Tooltip;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CourseItemHolder> implements Filterable {
-    private  ArrayList<Course> list;
+    private ArrayList<Course> list;
     private ArrayList<Course> filteredList = new ArrayList<>();
     private ArrayList<Course> listFull;
     public LocalDataBase dataBase = HujiAssistentApplication.getInstance().getDataBase();
@@ -44,17 +46,16 @@ public class CoursesAdapter extends RecyclerView.Adapter<CourseItemHolder> imple
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 ArrayList<Course> filteredList = new ArrayList<>();
-                if (charSequence == null || charSequence.length() == 0){
+                if (charSequence == null || charSequence.length() == 0) {
                     filteredList.addAll(listFull);
-                }
-                else {
+                } else {
                     for (Course item : list) {
                         // Finds courses matching the filter
                         if (item.getName().toLowerCase().contains(charString.toLowerCase()) || item.getNumber().contains(charSequence)) {
                             filteredList.add(item);
                         }
                     }
-                   // list = filteredList;
+                    // list = filteredList;
                 }
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filteredList;
@@ -72,13 +73,13 @@ public class CoursesAdapter extends RecyclerView.Adapter<CourseItemHolder> imple
     private Context mContext;
     ArrayList<Course> filterList;
 
-    public CoursesAdapter(Context context){
+    public CoursesAdapter(Context context) {
         this.list = new ArrayList<>();
         this.filterList = new ArrayList<>(list);
         this.mContext = context;
     }
 
-    public void addCoursesListToAdapter(ArrayList<Course> newList){
+    public void addCoursesListToAdapter(ArrayList<Course> newList) {
         this.list = new ArrayList<>();
         this.list.clear();
         this.listFull = new ArrayList<>(newList);
@@ -86,7 +87,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CourseItemHolder> imple
         notifyDataSetChanged();
     }
 
-    public void removeCourseFromAdapter(Course course){
+    public void removeCourseFromAdapter(Course course) {
         this.list.remove(course);
         notifyDataSetChanged();
     }
@@ -106,20 +107,20 @@ public class CoursesAdapter extends RecyclerView.Adapter<CourseItemHolder> imple
     public static OnPopUpApproveListener onPopUpApproveListener;
 
     // Create an interface
-    public interface DeleteClickListener{
+    public interface DeleteClickListener {
         void onDeleteClick(View v, Course item);
     }
 
-    public interface OnPopUpApproveListener{
+    public interface OnPopUpApproveListener {
         void OnPopUpClick(String item, String grade);
     }
 
     // Create an interface
-    public interface CancelClickListener{
+    public interface CancelClickListener {
         void onCancelClick(Course item);
     }
 
-    public interface OnCheckBoxClickListener{
+    public interface OnCheckBoxClickListener {
         void onCheckBoxClicked(View v, Course item);
     }
 
@@ -131,23 +132,23 @@ public class CoursesAdapter extends RecyclerView.Adapter<CourseItemHolder> imple
         public void onAddGradeClick(Course item, String grade);
     }
 
-    public void setItemClickListener(OnItemClickListener listener){
+    public void setItemClickListener(OnItemClickListener listener) {
         this.itemClickListener = listener;
     }
 
-    public void setOnPopUpListener(OnPopUpApproveListener onPopUpListener){
+    public void setOnPopUpListener(OnPopUpApproveListener onPopUpListener) {
         onPopUpApproveListener = onPopUpListener;
     }
 
-    public void setItemCheckBoxListener(OnCheckBoxClickListener listener){
+    public void setItemCheckBoxListener(OnCheckBoxClickListener listener) {
         this.checkBoxClickListener = listener;
     }
 
-    public void setDeleteListener(DeleteClickListener listener){
+    public void setDeleteListener(DeleteClickListener listener) {
         this.deleteListener = listener;
     }
 
-    public void setGradeListener(AddGradeListener listener){
+    public void setGradeListener(AddGradeListener listener) {
         this.addGradeListener = listener;
     }
 
@@ -307,65 +308,66 @@ public class CoursesAdapter extends RecyclerView.Adapter<CourseItemHolder> imple
 
         private String item_number;
         private String item_grade;
-        public PopupDialogFragment(Course item){
+
+        public PopupDialogFragment(Course item) {
             this.item_number = item.getNumber();
         }
+
         Button approveBtn;
         EditText grade;
-        String gradeStr="";
+        String gradeStr = "";
 
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-             approveBtn = view.findViewById(R.id.approveBtn);
-             grade = view.findViewById(R.id.editTextNumber1);
-             gradeStr = grade.getText().toString();
+            approveBtn = view.findViewById(R.id.approveBtn);
+            grade = view.findViewById(R.id.editTextNumber1);
+            gradeStr = grade.getText().toString();
 
-             grade.addTextChangedListener(new TextWatcher() {
-                 @Override
-                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            grade.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                 }
+                }
 
-                 @Override
-                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                     String gradeStr = grade.getText().toString();
-                 }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    String gradeStr = grade.getText().toString();
+                }
 
-                 @Override
-                 public void afterTextChanged(Editable s) {
+                @Override
+                public void afterTextChanged(Editable s) {
 
-                 }
-             });
+                }
+            });
 
-             approveBtn.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     gradeStr = grade.getText().toString();
-                     if (onPopUpApproveListener != null) {
-                         onPopUpApproveListener.OnPopUpClick(item_number, gradeStr);
-                     }
-                 }
-             });
+            approveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    gradeStr = grade.getText().toString();
+                    if (onPopUpApproveListener != null) {
+                        onPopUpApproveListener.OnPopUpClick(item_number, gradeStr);
+                    }
+                }
+            });
         }
     }
 
     public void showPopup(Course item, View view) {
         @SuppressLint("InflateParams") View popupView = LayoutInflater.from(mContext).inflate(R.layout.popup_layout, null);
         PopupDialogFragment dialogFragment = new PopupDialogFragment(item);
-        dialogFragment.show(((MainScreenActivity)mContext).getSupportFragmentManager(), "OpenPopup");
+        dialogFragment.show(((MainScreenActivity) mContext).getSupportFragmentManager(), "OpenPopup");
     }
 
     public int getItemCount() {
         if (this.list != null) {
             return this.list.size();
-        }
-        else{
+        } else {
             return 0;
         }
     }
 
-    public ArrayList<Course> getItems(){
+    public ArrayList<Course> getItems() {
         return list;
     }
 }

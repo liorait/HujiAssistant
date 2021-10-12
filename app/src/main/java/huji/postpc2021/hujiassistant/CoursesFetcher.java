@@ -1,7 +1,7 @@
 package huji.postpc2021.hujiassistant;
 
 import android.os.AsyncTask;
-import android.util.Log;
+//import android.util.Log;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,7 +47,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
     private boolean specificChugFlag = true;
     private String specificChugNumber = "";
 
-    private final  HashMap<String, String> faculties = new HashMap<>();
+    private final HashMap<String, String> faculties = new HashMap<>();
 
     private final HashMap<String, Faculty> numberFacultyHashMap = new HashMap<>(); // HashMap between faculty number to faculty Object
     private final HashMap<Faculty, ArrayList<UploadChug>> facultyChugHashMap = new HashMap<>(); // HashMap between faculty Object to all the Chugs at the faculty as Objects
@@ -205,7 +205,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                     }
 
                     UploadChug newUploadChug = new UploadChug(title, chugId, parentFaculty);
-                    Log.e("TAG", "getChugsData: " + chugId);
+//                    Log.e("TAG", "getChugsData: " + chugId);
                     chugsInCurrFaculty.add(newUploadChug);
 
                     DocumentReference document = firebaseInstancedb.collection(collection_name).document(chugId);
@@ -214,10 +214,10 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                         if (task.isSuccessful()) {
                             DocumentSnapshot doc = task.getResult();
                             if (doc.exists()) {
-                                Log.e("exists", "This chug already exists :" + chugId);
+//                                Log.e("exists", "This chug already exists :" + chugId);
                             } else {
                                 document.set(newUploadChug).addOnCompleteListener(aVoid -> {
-                                    Log.i("new", "added a new chug to firestore db : " + chugId);
+//                                    Log.i("new", "added a new chug to firestore db : " + chugId);
                                 });
                             }
                         }
@@ -287,10 +287,10 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot doc = task.getResult();
                                 if (doc.exists()) {
-                                    Log.e("exists", "This maslul already exists :" + chugId + " -> " + maslulId);
+//                                    Log.e("exists", "This maslul already exists :" + chugId + " -> " + maslulId);
                                 } else {
                                     document.set(newUploadMaslul).addOnSuccessListener(aVoid -> {
-                                        Log.i("new", "added a new maslul to firestore db : " + chugId + " -> " + maslulId);
+//                                        Log.i("new", "added a new maslul to firestore db : " + chugId + " -> " + maslulId);
                                     });
                                 }
                             }
@@ -299,7 +299,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                     line = bufferedReader.readLine();
                 } // end of while loop
 
-                System.out.println("got all maslulim for chug: " + chugId);
+//                System.out.println("got all maslulim for chug: " + chugId);
                 chugMaslulHashMap.put(uploadChug, (ArrayList<UploadMaslul>) maslulimInCurrChug.clone());
                 maslulimInCurrChug.clear();
 
@@ -308,7 +308,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
             } // end of uploadChugs for loop
 
         } // end of faculties for loop
-        System.out.println("gets all maslulim for all faculties");
+//        System.out.println("gets all maslulim for all faculties");
     }
 
     private void getCoursesData() throws IOException, InterruptedException, ExecutionException {
@@ -340,15 +340,16 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                     String maslulId = currUploadMaslul.getId();
                     boolean pointsFlag = false;
 
-                    if (facultyId.equals("12")) facultyId = "2"; // some Faculties number need special treatment and trimming
+                    if (facultyId.equals("12"))
+                        facultyId = "2"; // some Faculties number need special treatment and trimming
                     else if (facultyId.equals("11") || facultyId.equals("16") || facultyId.equals("30") || facultyId.length() < 2) {
-                        Log.e("CourseFetcher", "Error, the following data was cancelld: " + facultyId + " " + chugId + " " + maslulId);
+//                        Log.e("CourseFetcher", "Error, the following data was cancelld: " + facultyId + " " + chugId + " " + maslulId);
                     } else facultyId = facultyId.substring(1);
 
-                    Log.e("CourseFetcher", "processing now: " + " " + chugId + " " + maslulId);
+//                    Log.e("CourseFetcher", "processing now: " + " " + chugId + " " + maslulId);
 
                     URL url = new URL("http://moon.cc.huji.ac.il/nano/pages/wfrMaslulDetails.aspx?year=" + yearByUser + "&faculty=2&entityId=" + chugId + "&chugId=" + chugId + "&degreeCode=71&maslulId=" + facultyId + maslulId);
-                    Log.e("Address", "curr url: " + "http://moon.cc.huji.ac.il/nano/pages/wfrMaslulDetails.aspx?year=" + yearByUser + "&faculty=2&entityId=" + chugId + "&chugId=" + chugId + "&degreeCode=71&maslulId=" + facultyId + maslulId);
+//                    Log.e("Address", "curr url: " + "http://moon.cc.huji.ac.il/nano/pages/wfrMaslulDetails.aspx?year=" + yearByUser + "&faculty=2&entityId=" + chugId + "&chugId=" + chugId + "&degreeCode=71&maslulId=" + facultyId + maslulId);
 
 
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -374,7 +375,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                     while (line != null) {  // course details
 
                         if (notFoundPattern.matcher(line).find()) { // page not found, wrong url
-                            Log.e("Address", "Wrong url, canceled " + url + "\nchug: " + chugId + " maslul: " + maslulId);
+//                            Log.e("Address", "Wrong url, canceled " + url + "\nchug: " + chugId + " maslul: " + maslulId);
                             firebaseInstancedb.collection(collection_name).document(chugId).collection("maslulimInChug").document(maslulId).delete();
                             nonRelevanteUploadMasluls.add(currUploadMaslul);
                             break;
@@ -417,7 +418,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                                             currUploadMaslul.setTotalPoints(value);
 
                                             DocumentReference document = firebaseInstancedb.collection(collection_name).document(chugId).collection("maslulimInChug").document(maslulId);
-                                            document.set(currUploadMaslul).addOnCompleteListener(task -> Log.i("maslulData", "points data updated on " + chugId + " -> " + maslulId));
+//                                            document.set(currUploadMaslul).addOnCompleteListener(task -> Log.i("maslulData", "points data updated on " + chugId + " -> " + maslulId));
                                             break;
                                         default:
                                             break;
@@ -449,10 +450,10 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot doc = task.getResult();
                                     if (doc.exists()) {
-                                        Log.e("exists", "This course already exists :" + chugId + " -> " + maslulId + " -> " + newUploadUploadCourse.getNumber());
+//                                        Log.e("exists", "This course already exists :" + chugId + " -> " + maslulId + " -> " + newUploadUploadCourse.getNumber());
                                     } else {
                                         document.set(newUploadUploadCourse).addOnSuccessListener(aVoid -> {
-                                            Log.i("new", "added a new course to firestore db: " + chug + " -> " + maslul + " -> " + newUploadUploadCourse.getNumber());
+//                                            Log.i("new", "added a new course to firestore db: " + chug + " -> " + maslul + " -> " + newUploadUploadCourse.getNumber());
                                         });
                                     }
                                 }
@@ -461,7 +462,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                         line = bufferedReader.readLine();
                     } // end of reading line while loop
 
-                    System.out.println("gets all course to maslul to: " + chugId + " -> " + maslulId);
+//                    System.out.println("gets all course to maslul to: " + chugId + " -> " + maslulId);
                     maslulCourseHashMap.put(currUploadMaslul, (ArrayList<UploadCourse>) coursesInCurrMaslul.clone());
                     coursesInCurrMaslul.clear();
 
@@ -479,7 +480,7 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
 
             uploadChugs.removeAll(nonRelevanteUploadChugs);
             nonRelevanteUploadChugs.clear();
-            System.out.println("finished faculty: " + facultyId);
+//            System.out.println("finished faculty: " + facultyId);
 
         } // end of for Faculty loop
     }
@@ -599,10 +600,10 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                                         if (task.isSuccessful()) {
                                             DocumentSnapshot doc = task.getResult();
                                             if (doc.exists()) {
-                                                Log.e("exists", "This schedule already exists :" + chugId + " -> " + maslulId + " -> " + courseId + " -> " + entry.toString());
+//                                                Log.e("exists", "This schedule already exists :" + chugId + " -> " + maslulId + " -> " + courseId + " -> " + entry.toString());
                                             } else {
                                                 document.set(entry).addOnSuccessListener(aVoid -> {
-                                                    Log.i("new", "added a new schedule entry to firestore db: " + chugId + " -> " + maslulId + " -> " + courseId + " -> " + entry.toString());
+//                                                    Log.i("new", "added a new schedule entry to firestore db: " + chugId + " -> " + maslulId + " -> " + courseId + " -> " + entry.toString());
                                                 });
                                             }
                                         }
@@ -634,10 +635,10 @@ public class CoursesFetcher extends AsyncTask<Void, Void, Void> {
                                         if (task.isSuccessful()) {
                                             DocumentSnapshot doc = task.getResult();
                                             if (doc.exists()) {
-                                                Log.e("exists", "This kdam course already exists :" + chugId + " -> " + maslulId + " -> " + courseId);
+//                                                Log.e("exists", "This kdam course already exists :" + chugId + " -> " + maslulId + " -> " + courseId);
                                             } else {
                                                 document.set(newKdamOrAfterCourse).addOnSuccessListener(aVoid -> {
-                                                    Log.i("new", "added a new courseKdam or after to firestore db: " + chugId + " -> " + maslulId + " -> " + courseId);
+//                                                    Log.i("new", "added a new courseKdam or after to firestore db: " + chugId + " -> " + maslulId + " -> " + courseId);
                                                 });
                                             }
                                         }

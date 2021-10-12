@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -363,7 +363,7 @@ public class MyCoursesFragment extends Fragment {
                     });
         }
         catch (Exception e){
-            Log.i("ERROR", "failed to get the courses of the student");
+//            Log.i("ERROR", "failed to get the courses of the student");
         }
 
         ArrayList<String> coursesIds = dataBase.getCurrentUser().getCourses();

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import huji.postpc2021.hujiassistant.HujiAssistentApplication;
 import huji.postpc2021.hujiassistant.LocalDataBase;
 import huji.postpc2021.hujiassistant.R;
+
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Locale;
@@ -17,6 +18,7 @@ import java.util.Locale;
 public class LoadDataMainActivity extends AppCompatActivity {
 
     LocalDataBase db;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class LoadDataMainActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = db.getUsersAuthenticator().getCurrentUser();
         // Update current language
-       // db.logoutUser();
+        // db.logoutUser();
         setLocale(db.loadLocale());
 
         // update UI when DB finish to load the initial data
