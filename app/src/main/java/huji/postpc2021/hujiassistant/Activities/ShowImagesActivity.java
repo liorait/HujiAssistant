@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import huji.postpc2021.hujiassistant.Model;
 import huji.postpc2021.hujiassistant.R;
 import huji.postpc2021.hujiassistant.ShowImagesAdapter;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,7 +55,7 @@ public class ShowImagesActivity extends AppCompatActivity {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String course = dataSnapshot.getKey();
                     assert course != null;
                     list.add(new Model("", course, COURSES_PREVIEW));
@@ -74,11 +75,11 @@ public class ShowImagesActivity extends AppCompatActivity {
         int stage = adapter.getStage();
         String savedCourse = adapter.getSavedCourse();
 
-        if (stage == COURSES_PREVIEW){
+        if (stage == COURSES_PREVIEW) {
             super.onBackPressed();
         }
         // Go back to courses preview
-        else if (stage == YEAR_PREVIEW){
+        else if (stage == YEAR_PREVIEW) {
             adapter = new ShowImagesAdapter(this, list, COURSES_PREVIEW, "");
             recyclerView.setAdapter(adapter);
             list = new ArrayList<>();
@@ -87,7 +88,7 @@ public class ShowImagesActivity extends AppCompatActivity {
             root.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String course = dataSnapshot.getKey();
                         assert course != null;
                         list.add(new Model("", course, COURSES_PREVIEW));
@@ -103,7 +104,7 @@ public class ShowImagesActivity extends AppCompatActivity {
         }
 
         // Go back to years preview
-        else if (stage == IMAGES_PREVIEW){
+        else if (stage == IMAGES_PREVIEW) {
             adapter = new ShowImagesAdapter(this, list, 1, savedCourse);
             recyclerView.setAdapter(adapter);
             list = new ArrayList<>();

@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -163,7 +163,7 @@ public class TextViewFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-                                            Log.d("LoginActivity", "signInWithEmail:success");
+//                                            Log.d("LoginActivity", "signInWithEmail:success");
                                             FirebaseUser user = auth.getCurrentUser();
                                             db.setCurrentUser(user);
                                             StudentInfo newStudent = new StudentInfo(email.getText().toString(), password.getText().toString(),
@@ -171,7 +171,7 @@ public class TextViewFragment extends Fragment {
                                             viewModelApp.setStudent(newStudent);
                                             startActivity(new Intent(getActivity(), MainScreenActivity.class));
                                         }else{
-                                            Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
+//                                            Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
                                             Toast.makeText(getActivity(), R.string.incorrect_username, Toast.LENGTH_LONG).show();
                                         }
                                     }

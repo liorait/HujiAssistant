@@ -3,7 +3,7 @@ package huji.postpc2021.hujiassistant.Fragments;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -177,7 +177,7 @@ public class CoursesFragment extends Fragment {
                             }
                         });
             } catch (Exception e) {
-                Log.i("ERROR", "failed to get faculties");
+//                Log.i("ERROR", "failed to get faculties");
             }
 
             String COLLECTION = "coursesTestOnlyCs";
@@ -198,7 +198,7 @@ public class CoursesFragment extends Fragment {
                             }
                         });
             } catch (Exception e) {
-                Log.i("ERROR", "failed to get chugim");
+//                Log.i("ERROR", "failed to get chugim");
             }
 
             try {
@@ -219,7 +219,7 @@ public class CoursesFragment extends Fragment {
                             }
                         });
             } catch (Exception e) {
-                Log.i("ERROR", "failed to get maslulim");
+//                Log.i("ERROR", "failed to get maslulim");
             }
             degreeTextView.setText(degreeType);
             yearTextView.setText(year);
@@ -251,7 +251,7 @@ public class CoursesFragment extends Fragment {
                             }
                         });
             } catch (Exception e) {
-                Log.i("ERROR", "failed to get courses");
+//                Log.i("ERROR", "failed to get courses");
             }
 
             recyclerViewCourses.setAdapter(adapter);
@@ -397,7 +397,7 @@ public class CoursesFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Log.d("RegisterActivity", "registerWithEmail:success");
+//                                        Log.d("RegisterActivity", "registerWithEmail:success");
                                         Toast.makeText(getActivity(), R.string.register_Successfully_message, Toast.LENGTH_LONG).show();
                                         FirebaseUser user = auth.getCurrentUser();
 
@@ -417,14 +417,14 @@ public class CoursesFragment extends Fragment {
                                         endRegistrationBtnListener.onEndRegistrationBtnClicked();
 
                                     } else {
-                                        Log.w("RegisterActivity", "registerWithEmail:failure", task.getException());
+//                                        Log.w("RegisterActivity", "registerWithEmail:failure", task.getException());
                                         Toast.makeText(getActivity(), R.string.register_failed_message, Toast.LENGTH_LONG).show();                                            //todo: don't allow to continue
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.i("ERROR", "failed to register");
+//                            Log.i("ERROR", "failed to register");
                         }
                     });
                 }

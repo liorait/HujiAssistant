@@ -16,10 +16,12 @@ import androidx.core.content.ContextCompat;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+
 import huji.postpc2021.hujiassistant.HujiAssistentApplication;
 import huji.postpc2021.hujiassistant.LocalDataBase;
 import huji.postpc2021.hujiassistant.R;
 import huji.postpc2021.hujiassistant.StudentInfo;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -69,7 +71,7 @@ public class ScanQrActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String year =  new SimpleDateFormat("yyyy").format(new Date());
+                        String year = new SimpleDateFormat("yyyy").format(new Date());
                         String day = new SimpleDateFormat("dd.MM").format(new Date());
                         String course = result.getText();
                         StudentInfo user = db.getCurrentUser();
@@ -110,13 +112,13 @@ public class ScanQrActivity extends AppCompatActivity {
 
 
     // Verify camera and storage access permissions
-    private void verifyPermissions(){
+    private void verifyPermissions() {
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA};
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) != PackageManager.PERMISSION_GRANTED |
                 ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) != PackageManager.PERMISSION_GRANTED |
-                ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[2]) != PackageManager.PERMISSION_GRANTED){
+                ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[2]) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ScanQrActivity.this, permissions, 1);
         }
     }
@@ -129,16 +131,15 @@ public class ScanQrActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mCodeScanner.isPreviewActive()){
+        if (mCodeScanner.isPreviewActive()) {
             mCodeScanner.stopPreview();
-        }
-        else {
+        } else {
             startActivity(new Intent(this, MainScreenActivity.class));
             finish();
         }
     }
 
-    public boolean isCodeScannerActive(){
+    public boolean isCodeScannerActive() {
         return mCodeScanner.isPreviewActive();
     }
 }

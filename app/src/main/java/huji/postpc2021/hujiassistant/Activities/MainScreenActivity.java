@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import huji.postpc2021.hujiassistant.Chug;
 import huji.postpc2021.hujiassistant.Faculty;
 import huji.postpc2021.hujiassistant.Fragments.EditProfileFragment;
@@ -24,9 +25,11 @@ import huji.postpc2021.hujiassistant.Fragments.ShowFilesFragment;
 import huji.postpc2021.hujiassistant.Maslul;
 import huji.postpc2021.hujiassistant.PlanCoursesAdapter;
 import huji.postpc2021.hujiassistant.R;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +48,7 @@ import huji.postpc2021.hujiassistant.Fragments.MyCoursesFragment;
 import huji.postpc2021.hujiassistant.HujiAssistentApplication;
 import huji.postpc2021.hujiassistant.LocalDataBase;
 import huji.postpc2021.hujiassistant.StudentInfo;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -54,7 +58,9 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Locale;
+
 import android.content.res.Configuration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +111,7 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
             final DocumentReference docRef = firebaseInstancedb.collection("students").document(dataBase.getCurrentUser().getId());
             docRef.addSnapshotListener((value, error) -> {
                 if (error != null) {
-                    Log.w("ERROR", "Listen failure", error);
+//                    Log.w("ERROR", "Listen failure", error);
                     return;
                 }
                 if ((value != null) && (value.exists())) {
@@ -120,8 +126,10 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                     getMaslulInfo();
                 }
             });
+
         }
-        catch(Exception e){
+        catch (Exception e) {
+//            Log.i("ERROR", "error loading data from firebase");
         }
 
         logoutImageView = findViewById(R.id.logoutImageView);
@@ -142,7 +150,7 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
         PlanCourseInfoFragment planCourseInfoFragment = new PlanCourseInfoFragment();
         ShowFilesFragment showFilesFragment = new ShowFilesFragment();
         AddCourseFragment addCourseFragment = new AddCourseFragment();
-      //  PlannedCoursesFragment plannedCoursesFragment = new PlannedCoursesFragment();
+        //  PlannedCoursesFragment plannedCoursesFragment = new PlannedCoursesFragment();
         EditProfileFragment editProfileFragment = new EditProfileFragment();
         PlanCoursesFragment planCoursesFragment = new PlanCoursesFragment();
         SettingsFragment settingsFragment = new SettingsFragment();
@@ -166,16 +174,16 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
         });
 
         findViewById(R.id.settings).setOnClickListener(v -> {
-            SettingsFragment myFragment = (SettingsFragment)getSupportFragmentManager().findFragmentByTag("SETTINGS_FRAGMENT");
+            SettingsFragment myFragment = (SettingsFragment) getSupportFragmentManager().findFragmentByTag("SETTINGS_FRAGMENT");
             if (myFragment != null && myFragment.isVisible()) {
                 return;
             }
 
             getSupportFragmentManager().beginTransaction().setCustomAnimations(
                     R.anim.fade_in,  // enter
-                            R.anim.slide_out,  // exit
-                            R.anim.slide_in,   // popEnter
-                            R.anim.fade_out  // popExit
+                    R.anim.slide_out,  // exit
+                    R.anim.slide_in,   // popEnter
+                    R.anim.fade_out  // popExit
             )
                     .replace(mainFragmentView.getId(), settingsFragment, "SETTINGS_FRAGMENT")
                     .addToBackStack(null)
@@ -247,20 +255,20 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
             }
         };
 
-       // mainscreenfragment.coursesPlanScreenListenerBtn = new MainScreenFragment.coursesPlanScreenListenerBtn() {
+        // mainscreenfragment.coursesPlanScreenListenerBtn = new MainScreenFragment.coursesPlanScreenListenerBtn() {
         //    @Override
-          //  public void onPlanCoursesScreenClicked() {
-            //    getSupportFragmentManager().beginTransaction().setCustomAnimations(
-                //        R.anim.fade_in,  // enter
-                  //      R.anim.slide_out,  // exit
-                   //     R.anim.slide_in,   // popEnter
-                   //     R.anim.fade_out  // popExit
-             //   )
-                 //       .replace(mainFragmentView.getId(), plannedCoursesFragment, "PLAN_SCREEN_FRAGMENT").addToBackStack(null).commit();
-          //  }
-     //   };
+        //  public void onPlanCoursesScreenClicked() {
+        //    getSupportFragmentManager().beginTransaction().setCustomAnimations(
+        //        R.anim.fade_in,  // enter
+        //      R.anim.slide_out,  // exit
+        //     R.anim.slide_in,   // popEnter
+        //     R.anim.fade_out  // popExit
+        //   )
+        //       .replace(mainFragmentView.getId(), plannedCoursesFragment, "PLAN_SCREEN_FRAGMENT").addToBackStack(null).commit();
+        //  }
+        //   };
 
-        mainscreenfragment.editInfoButtonListener = new MainScreenFragment.editInfoButtonListener(){
+        mainscreenfragment.editInfoButtonListener = new MainScreenFragment.editInfoButtonListener() {
 
             @Override
             public void onEditInfoButtonClicked() {
@@ -274,7 +282,7 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
             }
         };
 
-        mainscreenfragment.showAttendanceButtonListener = new MainScreenFragment.showAttendanceButtonListener(){
+        mainscreenfragment.showAttendanceButtonListener = new MainScreenFragment.showAttendanceButtonListener() {
             @Override
             public void onShowAttendanceButtonClicked() {
                 startActivity(new Intent(MainScreenActivity.this, ShowAttendanceActivity.class));
@@ -282,7 +290,7 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
             }
         };
 
-        mainscreenfragment.uploadPicturesButtonListenerBtn = new MainScreenFragment.UploadPictureButtonListener(){
+        mainscreenfragment.uploadPicturesButtonListenerBtn = new MainScreenFragment.UploadPictureButtonListener() {
             @Override
             public void onUploadPictureButtonClicked() {
                 startActivity(new Intent(MainScreenActivity.this, CaptureImageActivity.class));
@@ -325,7 +333,7 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                         R.anim.slide_in,   // popEnter
                         R.anim.fade_out  // popExit
                 )
-                  .replace(mainFragmentView.getId(), myCoursesFragment, "MY_COURSES_FRAGMENT").addToBackStack(null).commit();
+                        .replace(mainFragmentView.getId(), myCoursesFragment, "MY_COURSES_FRAGMENT").addToBackStack(null).commit();
             }
         };
 
@@ -363,13 +371,6 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
             }
         };
 
-       // planCoursesFragment.onCheckBoxClickListener = new PlanCoursesAdapter.OnCheckBoxClickListener() {
-         //   @Override
-          //  public void onCheckBoxClicked(View v, Course item) {
-           //     dataBase.getCurrentStudent().updateCoursePlannedByStudentList(item.getNumber());
-           // }
-      //  };
-//
         planCoursesFragment.onItemClickListener = new PlanCoursesAdapter.OnItemClickListener() {
             @Override
             public void onClick(Course item) {
@@ -433,10 +434,9 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
         mbuilder.setSingleChoiceItems(listItems, languageIndex, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == 0){
+                if (which == 0) {
                     setLocale("en");
-                }
-                else if (which == 1){
+                } else if (which == 1) {
                     setLocale("he");
                 }
 
@@ -454,8 +454,8 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
     }
 
     @SuppressLint("IntentReset")
-    private void sendEmail(String email){
-        String [] emailList = email.split(",");
+    private void sendEmail(String email) {
+        String[] emailList = email.split(",");
 
         StudentInfo currentUser = dataBase.getCurrentStudent();
         String[] CC = {""};
@@ -482,9 +482,9 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
         }
     }
 
-    private void getChugInfo(){
-        if (dataBase.getCurrentChug() == null){
-            try{
+    private void getChugInfo() {
+        if (dataBase.getCurrentChug() == null) {
+            try {
                 String COLLECTION = "coursesTestOnlyCs";
                 Task<DocumentSnapshot> chugim1 = firebaseInstancedb.collection(COLLECTION).document(dataBase.getCurrentStudent().getChugId())
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -500,13 +500,14 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                         });
             }
             catch (Exception e){
+//                Log.i("ERROR_CHUG", "couldn't get chug");
             }
         }
     }
 
-    private void getFacultyInfo(){
-        if (dataBase.getCurrentFaculty() == null){
-            try{
+    private void getFacultyInfo() {
+        if (dataBase.getCurrentFaculty() == null) {
+            try {
                 String COLLECTION = "faculties";
                 Task<DocumentSnapshot> faculties1 = firebaseInstancedb.collection(COLLECTION).document(dataBase.getCurrentStudent().getFacultyId())
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -520,17 +521,16 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                                 dataBase.setCurrentFaculty(data);
                             }
                         });
-            }
-            catch (Exception e){
-                Log.i("ERROR_FACULTY", "couldn't get faculty");
+            } catch (Exception e) {
+//                Log.i("ERROR_FACULTY", "couldn't get faculty");
             }
         }
     }
 
-    private void getMaslulInfo(){
+    private void getMaslulInfo() {
         // If the sign up process was from other phone or the data was erased
-        if (dataBase.getCurrentMaslul() == null){
-            try{
+        if (dataBase.getCurrentMaslul() == null) {
+            try {
                 String COLLECTION = "coursesTestOnlyCs";
                 Task<DocumentSnapshot> maslulim1 = firebaseInstancedb.collection(COLLECTION).document(dataBase.getCurrentStudent().getChugId())
                         .collection("maslulimInChug").document(dataBase.getCurrentStudent().getMaslulId())
@@ -546,14 +546,13 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                                 dataBase.setCurrentMaslul(data);
                             }
                         });
-            }
-            catch (Exception e){
-                Log.i("ERROR_FACULTY", "couldn't get maslul");
+            } catch (Exception e) {
+//                Log.i("ERROR_FACULTY", "couldn't get maslul");
             }
         }
     }
 
-    private void getNewCoursesList(){
+    private void getNewCoursesList() {
 
         ArrayList<String> coursesOfStudentById = dataBase.getCurrentStudent().getCourses();
         ArrayList<Course> coursesOfStudentByCourse = new ArrayList<>();
@@ -574,7 +573,7 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         List<DocumentSnapshot> documents = task.getResult().getDocuments();
                         ArrayList<Course> coursesFromFireBase = new ArrayList<>();
-                        for (DocumentSnapshot document1 : documents){
+                        for (DocumentSnapshot document1 : documents) {
                             Course course = document1.toObject(Course.class);
                             coursesFromFireBase.add(course);
                         }
@@ -589,22 +588,22 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                         // Save the list of all courses in the student's maslul
                         dataBase.setCoursesFromFireBase(coursesFromFireBase);
 
-                        for (String id : coursesOfStudentPlannedById){
-                            for (Course course : coursesFromFireBase){
-                                if (course.getNumber().equals(id)){
+                        for (String id : coursesOfStudentPlannedById) {
+                            for (Course course : coursesFromFireBase) {
+                                if (course.getNumber().equals(id)) {
                                     course.setPlannedChecked(true);
                                     plannedCoursesOfStudentByCourse.add(course);
                                 }
                             }
                         }
 
-                        for (String id : coursesOfStudentById){
-                            for (Course course: coursesFromFireBase){
-                                if (course.getNumber().equals(id)){
+                        for (String id : coursesOfStudentById) {
+                            for (Course course : coursesFromFireBase) {
+                                if (course.getNumber().equals(id)) {
                                     course.setIsFinished(true);
                                     currentPointsSum += Integer.parseInt(course.getPoints());
                                     String type = course.getType();
-                                    switch (type){
+                                    switch (type) {
                                         case "לימודי חובה":
                                             currentMandatoryPoints += Integer.parseInt(course.getPoints());
                                             break;
@@ -688,11 +687,11 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(R.string.close_app).setPositiveButton(R.string.positive_answer, dialogClickListener)
                         .setNegativeButton(R.string.negative_answer, dialogClickListener).show();
-            } else if ((settingsFragment != null && settingsFragment.isVisible())){
-                changeSettingsFragment(settingsFragment, mainscreenfragment, "MAIN_FRAGMENT");}
-            else if ((settingsFragment2 != null && settingsFragment2.isVisible())){
-            changeSettingsFragment(settingsFragment2, mainscreenfragment, "MAIN_FRAGMENT");}
-            else {
+            } else if ((settingsFragment != null && settingsFragment.isVisible())) {
+                changeSettingsFragment(settingsFragment, mainscreenfragment, "MAIN_FRAGMENT");
+            } else if ((settingsFragment2 != null && settingsFragment2.isVisible())) {
+                changeSettingsFragment(settingsFragment2, mainscreenfragment, "MAIN_FRAGMENT");
+            } else {
                 super.onBackPressed();
             }
         }
@@ -734,7 +733,7 @@ public class MainScreenActivity extends AppCompatActivity implements NavigationV
     }
 
 
-    private void changeSettingsFragment(SettingsFragment fragmentFrom, MainScreenFragment fragmentTo, String tag){
+    private void changeSettingsFragment(SettingsFragment fragmentFrom, MainScreenFragment fragmentTo, String tag) {
         if (fragmentFrom != null && fragmentFrom.isVisible()) {
             getSupportFragmentManager().beginTransaction().setCustomAnimations(
                     R.anim.fade_in,  // enter

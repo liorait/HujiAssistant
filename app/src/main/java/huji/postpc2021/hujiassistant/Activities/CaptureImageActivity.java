@@ -1,5 +1,6 @@
 
 package huji.postpc2021.hujiassistant.Activities;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,6 +38,7 @@ import huji.postpc2021.hujiassistant.HujiAssistentApplication;
 import huji.postpc2021.hujiassistant.LocalDataBase;
 import huji.postpc2021.hujiassistant.Model;
 import huji.postpc2021.hujiassistant.R;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -134,8 +136,7 @@ public class CaptureImageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (imageTitle.getText().toString().isEmpty()) {
                     Toast.makeText(CaptureImageActivity.this, R.string.image_description_is_empty, Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     if (checkCourseNumberValidation()) {
                         if (uploadChoose == GALLERY_TYPE) {
                             uploadToFirebase(imageUri, GALLERY_REQUEST_CODE, imageTitle.getText().toString());
@@ -144,8 +145,7 @@ public class CaptureImageActivity extends AppCompatActivity {
                         } else if (uploadChoose == PDF_TYPE) {
                             uploadToFirebase(imageUri, DOCUMENTS_REQUEST_CODE, messagePushId);
                         }
-                    }
-                    else{
+                    } else {
                         Toast.makeText(CaptureImageActivity.this, R.string.course_number_is_not_valid, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -246,29 +246,27 @@ public class CaptureImageActivity extends AppCompatActivity {
     }
 
     private void uploadToFirebase(Uri uri, int source, String name) {
-        name =  new SimpleDateFormat("dd-MM-yyyy").format(new Date()) +
+        name = new SimpleDateFormat("dd-MM-yyyy").format(new Date()) +
                 "_" + dataBase.getCurrentStudent().getPersonalName() + "_" +
                 dataBase.getCurrentStudent().getFamilyName();
         String course = dropdown.getSelectedItem().toString();
         String year = new SimpleDateFormat("yyyy").format(new Date());
 
-        if (!imageTitle.getText().toString().equals("")){
-            name =  imageTitle.getText().toString() + "_" + name;
+        if (!imageTitle.getText().toString().equals("")) {
+            name = imageTitle.getText().toString() + "_" + name;
         }
         StorageReference fileRef;
         int type;
         String nameToUpload = "";
-        if (source == GALLERY_REQUEST_CODE){
+        if (source == GALLERY_REQUEST_CODE) {
             fileRef = reference.child(course).child(year).child(name + "." + getFileExtension(uri));
             nameToUpload = name + "." + getFileExtension(uri);
             type = GALLERY_TYPE;
-        }
-        else if (source == CAMERA_REQUEST_CODE){
+        } else if (source == CAMERA_REQUEST_CODE) {
             fileRef = reference.child("Camera_images/" + name + ".png");
             nameToUpload = name + ".png";
             type = CAMERA_TYPE;
-        }
-        else{
+        } else {
             fileRef = reference.child("Documents/" + name + ".pdf");
             nameToUpload = name + ".pdf";
             type = PDF_TYPE;
@@ -281,12 +279,11 @@ public class CaptureImageActivity extends AppCompatActivity {
                 finalFileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Model model = new Model(uri.toString(), finalNameToUpload,type);
+                        Model model = new Model(uri.toString(), finalNameToUpload, type);
                         progressBar.setVisibility(View.INVISIBLE);
-                        if (type == GALLERY_TYPE || type == CAMERA_TYPE){
+                        if (type == GALLERY_TYPE || type == CAMERA_TYPE) {
                             root.child(course).child(year).push().setValue(model);
-                        }
-                        else{
+                        } else {
                             rootForDocument.child(course).child(year).push().setValue(model);
                         }
                         imageTitle.setText("");
@@ -311,16 +308,16 @@ public class CaptureImageActivity extends AppCompatActivity {
         });
     }
 
-    private String getFileExtension(Uri mUri){
+    private String getFileExtension(Uri mUri) {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(mUri));
     }
 
     private void askCameraPermissions() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        }else {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
             dispatchTakePictureIntent();
         }
     }
@@ -339,7 +336,7 @@ public class CaptureImageActivity extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.fileprovider",
+                        "huji.postpc2021.hujiassistant.Activities.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 cameraUploadActivityResultLauncher.launch(takePictureIntent);
@@ -351,10 +348,9 @@ public class CaptureImageActivity extends AppCompatActivity {
 //     Create an image file name
         String imageFileName = "";
         String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        if (!imageTitle.getText().toString().equals("")){
+        if (!imageTitle.getText().toString().equals("")) {
             imageFileName = imageTitle.getText().toString() + "_";
-        }
-        else{
+        } else {
             imageFileName = timeStamp + "_";
         }
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -393,14 +389,14 @@ public class CaptureImageActivity extends AppCompatActivity {
         pdfName.setText(savedInstanceState.getString("pdfNameText"));
     }
 
-    private void hideButtonsAfterChooseImage(){
+    private void hideButtonsAfterChooseImage() {
         imageView.setVisibility(View.INVISIBLE);
         cameraImageUpload.setVisibility(View.INVISIBLE);
         pdfImageUpload.setVisibility(View.INVISIBLE);
         imageShow.setVisibility(View.VISIBLE);
     }
 
-    private void showButtonsAfterChooseImage(){
+    private void showButtonsAfterChooseImage() {
         imageView.setVisibility(View.VISIBLE);
         cameraImageUpload.setVisibility(View.VISIBLE);
         pdfImageUpload.setVisibility(View.VISIBLE);
@@ -411,7 +407,7 @@ public class CaptureImageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (imageShow.getVisibility() == View.VISIBLE){
+        if (imageShow.getVisibility() == View.VISIBLE) {
             DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE: {
@@ -425,8 +421,7 @@ public class CaptureImageActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.reset_image).setPositiveButton(R.string.positive_answer, dialogClickListener)
                     .setNegativeButton(R.string.negative_answer, dialogClickListener).show();
-        }
-        else{
+        } else {
             startActivity(new Intent(this, MainScreenActivity.class));
             finish();
         }

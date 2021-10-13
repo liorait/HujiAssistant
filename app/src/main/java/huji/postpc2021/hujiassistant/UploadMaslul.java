@@ -1,10 +1,9 @@
 package huji.postpc2021.hujiassistant;
 
 
-
 public class UploadMaslul {
     /**
-     *  A class that represent A Maslul in A Chug
+     * A class that represent A Maslul in A Chug
      */
 
     private String maslulId = "";

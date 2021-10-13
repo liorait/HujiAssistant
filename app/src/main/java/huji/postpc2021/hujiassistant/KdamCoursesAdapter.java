@@ -15,23 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class KdamCoursesAdapter extends RecyclerView.Adapter<KdamCourseItemHolder>{
+public class KdamCoursesAdapter extends RecyclerView.Adapter<KdamCourseItemHolder> {
 
     private ArrayList<KdamOrAfterCourse> list;
     private Context mContext;
 
-    public KdamCoursesAdapter(Context context){
+    public KdamCoursesAdapter(Context context) {
         this.list = new ArrayList<>();
         this.mContext = context;
     }
 
-    public void addKdamCoursesListToAdapter(ArrayList<KdamOrAfterCourse> newList){
+    public void addKdamCoursesListToAdapter(ArrayList<KdamOrAfterCourse> newList) {
         this.list.clear();
         this.list.addAll(newList);
         notifyDataSetChanged();
     }
 
-    public void removeCourseFromAdapter(KdamOrAfterCourse course){
+    public void removeCourseFromAdapter(KdamOrAfterCourse course) {
         this.list.remove(course);
         notifyDataSetChanged();
     }
@@ -49,16 +49,16 @@ public class KdamCoursesAdapter extends RecyclerView.Adapter<KdamCourseItemHolde
     public OnCheckBoxClickListener checkBoxClickListener;
 
     // Create an interface
-    public interface DeleteClickListener{
+    public interface DeleteClickListener {
         void onDeleteClick(View v, Course item);
     }
 
     // Create an interface
-    public interface CancelClickListener{
+    public interface CancelClickListener {
         void onCancelClick(Course item);
     }
 
-    public interface OnCheckBoxClickListener{
+    public interface OnCheckBoxClickListener {
         void onCheckBoxClicked(View v, Course item);
     }
 
@@ -66,7 +66,7 @@ public class KdamCoursesAdapter extends RecyclerView.Adapter<KdamCourseItemHolde
         public void onClick(Course item);
     }
 
-    public void setItemCheckBoxListener(OnCheckBoxClickListener listener){
+    public void setItemCheckBoxListener(OnCheckBoxClickListener listener) {
         this.checkBoxClickListener = listener;
     }
 
@@ -77,19 +77,18 @@ public class KdamCoursesAdapter extends RecyclerView.Adapter<KdamCourseItemHolde
         KdamOrAfterCourse courseItem = this.list.get(position);
         holder.name.setText(courseItem.getName());
         holder.number.setText(courseItem.getNumber());
-        String semesterText = " סמסטר " + courseItem.getSemester()  ;
+        String semesterText = " סמסטר " + courseItem.getSemester();
         holder.semester.setText(semesterText);
         String text = courseItem.getPoints() + " נ''ז ";
         holder.points.setText(text);
 
         // courses the student has to complete will be colored red
-        if (!HujiAssistentApplication.getInstance().getDataBase().getCurrentStudent().getCourses().contains(courseItem.getNumber())){
+        if (!HujiAssistentApplication.getInstance().getDataBase().getCurrentStudent().getCourses().contains(courseItem.getNumber())) {
             holder.name.setTextColor(Color.RED);
             holder.number.setTextColor(Color.RED);
             holder.semester.setTextColor(Color.RED);
             holder.points.setTextColor(Color.RED);
-        }
-        else {
+        } else {
             holder.name.setTextColor(Color.BLACK);
             holder.number.setTextColor(Color.BLACK);
             holder.semester.setTextColor(Color.BLACK);
@@ -101,6 +100,7 @@ public class KdamCoursesAdapter extends RecyclerView.Adapter<KdamCourseItemHolde
         return this.list.size();
     }
 
-    public ArrayList<KdamOrAfterCourse> getItems(){
+    public ArrayList<KdamOrAfterCourse> getItems() {
         return list;
-    }}
+    }
+}

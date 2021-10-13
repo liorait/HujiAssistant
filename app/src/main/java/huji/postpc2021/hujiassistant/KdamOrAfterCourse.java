@@ -1,13 +1,13 @@
 package huji.postpc2021.hujiassistant;
 
 public class KdamOrAfterCourse {
-    private  String number="";
-    private  String name="";
-    private  String points="";
-    private  String semester="";
-    private  String group="";
+    private String number = "";
+    private String name = "";
+    private String points = "";
+    private String semester = "";
+    private String group = "";
 
-    public KdamOrAfterCourse(){
+    public KdamOrAfterCourse() {
 
     }
 

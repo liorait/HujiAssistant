@@ -25,7 +25,6 @@ public class CourseScheduleEntry {
     }
 
 
-
     public String getType() {
         return type;
     }

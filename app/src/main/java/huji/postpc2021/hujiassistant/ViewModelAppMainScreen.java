@@ -8,20 +8,18 @@ public class ViewModelAppMainScreen extends ViewModel {
 
     public MutableLiveData<Course> courseMutableLiveData = new MutableLiveData<>();
 
-    public ViewModelAppMainScreen(FragmentActivity fragmentActivity){
+    public ViewModelAppMainScreen(FragmentActivity fragmentActivity) {
     }
 
-    public ViewModelAppMainScreen(){
-
+    public ViewModelAppMainScreen() {
     }
 
-    public void set(Course course){
+    public void set(Course course) {
         courseMutableLiveData.setValue(course);
     }
 
-    public MutableLiveData<Course> get(){
-        if (courseMutableLiveData == null)
-        {
+    public MutableLiveData<Course> get() {
+        if (courseMutableLiveData == null) {
             courseMutableLiveData = new MutableLiveData<>();
         }
         return courseMutableLiveData;

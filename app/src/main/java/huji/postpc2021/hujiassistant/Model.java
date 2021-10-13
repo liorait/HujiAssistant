@@ -7,10 +7,11 @@ public class Model {
     private int type;
     private String id;
 
-    public Model(){
+    public Model() {
 
     }
-    public Model(String imageUrl, String name, int type){
+
+    public Model(String imageUrl, String name, int type) {
         this.imageUrl = imageUrl;
         this.type = type;
         this.name = name;

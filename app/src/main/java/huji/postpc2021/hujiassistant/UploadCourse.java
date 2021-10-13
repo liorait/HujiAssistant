@@ -1,12 +1,12 @@
 package huji.postpc2021.hujiassistant;
 
-import android.util.Log;
+//import android.util.Log;
 
 import java.io.Serializable;
 
 public class UploadCourse implements Serializable {
     /**
-     *  A class that represent a Course in a Maslul in A Chug
+     * A class that represent a Course in a Maslul in A Chug
      */
 
     private String number;
@@ -39,13 +39,13 @@ public class UploadCourse implements Serializable {
     }
 
     public void printCourse(UploadCourse uploadCourse) {
-        Log.i("TAG", "\nnumber: " + uploadCourse.number + "\n"
-                + "name: " + uploadCourse.name + "\n"
-                + "points: " + uploadCourse.points + "\n"
-                + "semester: " + uploadCourse.semester + "\n"
-                + "type: " + uploadCourse.type + "\n"
-                + "year: " + uploadCourse.year + "\n"
-        );
+//        System.out.println("\nnumber: " + uploadCourse.number + "\n"
+//                + "name: " + uploadCourse.name + "\n"
+//                + "points: " + uploadCourse.points + "\n"
+//                + "semester: " + uploadCourse.semester + "\n"
+//                + "type: " + uploadCourse.type + "\n"
+//                + "year: " + uploadCourse.year + "\n"
+//        );
     }
 
 

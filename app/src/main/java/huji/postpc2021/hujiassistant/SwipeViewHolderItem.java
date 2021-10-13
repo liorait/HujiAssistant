@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SwipeViewHolderItem extends ItemTouchHelper.Callback {
 
 
-
     Context mContext;
-
 
 
     public SwipeViewHolderItem(Context context) {

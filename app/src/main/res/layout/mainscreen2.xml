@@ -102,7 +102,6 @@
                         android:layout_height="wrap_content"
                         app:menu="@menu/bottommenu" />
 
-
                 </com.google.android.material.bottomappbar.BottomAppBar>
 
                 <ProgressBar

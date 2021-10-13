@@ -17,7 +17,7 @@ import huji.postpc2021.hujiassistant.R;
 public class ImageActivity extends AppCompatActivity {
 
     WebView webView;
-    Activity activity ;
+    Activity activity;
     private ProgressDialog progDailog;
 
     @SuppressLint("NewApi")
@@ -32,7 +32,7 @@ public class ImageActivity extends AppCompatActivity {
         activity = this;
 
         // Show ProgressDialog when the image is loading
-        progDailog = ProgressDialog.show(activity, getString(R.string.loading),getString(R.string.please_wait_message), true);
+        progDailog = ProgressDialog.show(activity, getString(R.string.loading), getString(R.string.please_wait_message), true);
         progDailog.setCancelable(false);
 
         webView = findViewById(R.id.webview);
@@ -45,7 +45,7 @@ public class ImageActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -54,6 +54,7 @@ public class ImageActivity extends AppCompatActivity {
 
                 return true;
             }
+
             @Override
             public void onPageFinished(WebView view, final String url) {
                 progDailog.dismiss();

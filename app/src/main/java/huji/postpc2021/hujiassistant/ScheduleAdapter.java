@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleItemHolder> {
     private ArrayList<CourseScheduleEntry> list = new ArrayList<>();
-    private  LocalDataBase dataBase;
+    private LocalDataBase dataBase;
     public OnCheckBoxClickListener checkBoxClickListener;
 
     @NonNull
@@ -21,15 +21,15 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleItemHolder> {
         return new ScheduleItemHolder(view);
     }
 
-    public interface OnCheckBoxClickListener{
+    public interface OnCheckBoxClickListener {
         void onCheckBoxClicked(View v, CourseScheduleEntry item);
     }
 
-    public void setItemCheckBoxListener(ScheduleAdapter.OnCheckBoxClickListener listener){
+    public void setItemCheckBoxListener(ScheduleAdapter.OnCheckBoxClickListener listener) {
         this.checkBoxClickListener = listener;
     }
 
-    public void addScheduleListToAdapter(ArrayList<CourseScheduleEntry> schedules){
+    public void addScheduleListToAdapter(ArrayList<CourseScheduleEntry> schedules) {
         this.list.clear();
         this.list.addAll(schedules);
         notifyDataSetChanged();
@@ -40,7 +40,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleItemHolder> {
         CourseScheduleEntry scheduleEntry = this.list.get(position);
         dataBase = HujiAssistentApplication.getInstance().getDataBase();
 
-        String hours = scheduleEntry.getStarting() + " - " +scheduleEntry.getEnding();
+        String hours = scheduleEntry.getStarting() + " - " + scheduleEntry.getEnding();
         String dayText = " יום " + scheduleEntry.getDay();
         String groupText = " קבוצה " + scheduleEntry.getGroup();
 

@@ -20,7 +20,7 @@ import java.net.URLEncoder;
 public class PDFActivity extends AppCompatActivity {
 
     WebView webView;
-    Activity activity ;
+    Activity activity;
     private ProgressDialog progDailog;
 
     @SuppressLint("NewApi")
@@ -35,7 +35,7 @@ public class PDFActivity extends AppCompatActivity {
         activity = this;
 
         // Show ProgressDialog when the image is loading
-        progDailog = ProgressDialog.show(activity, getString(R.string.loading),getString(R.string.please_wait_message), true);
+        progDailog = ProgressDialog.show(activity, getString(R.string.loading), getString(R.string.please_wait_message), true);
         progDailog.setCancelable(false);
 
         webView = findViewById(R.id.webview);
@@ -48,7 +48,7 @@ public class PDFActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -57,6 +57,7 @@ public class PDFActivity extends AppCompatActivity {
 
                 return true;
             }
+
             @Override
             public void onPageFinished(WebView view, final String url) {
                 progDailog.dismiss();
@@ -66,7 +67,7 @@ public class PDFActivity extends AppCompatActivity {
         String url = "";
         try {
             // Convert the Firestore url to 'UTF-8' url
-            url= URLEncoder.encode(path,"UTF-8");
+            url = URLEncoder.encode(path, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

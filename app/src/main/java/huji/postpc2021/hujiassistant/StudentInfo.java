@@ -25,7 +25,7 @@ public class StudentInfo {
     private ArrayList<String> coursesMadeByStudent; // list of course id's
 
     // Hash map that saves the grades of the student by course id
-    private HashMap<String, String> coursesGrades=null;
+    private HashMap<String, String> coursesGrades = null;
 
     //private ArrayList<String> coursesPlannedByStudent = new ArrayList<>();;
     private ArrayList<CourseScheduleEntry> schedulePlannedByStudent = null;
@@ -33,11 +33,11 @@ public class StudentInfo {
     // Saves the planned courses of the student
     private ArrayList<String> plannedCourses = null;
 
-    public StudentInfo(){
+    public StudentInfo() {
 
     }
 
-    public StudentInfo(String email_, String password_, String personalName_, String familyName_){
+    public StudentInfo(String email_, String password_, String personalName_, String familyName_) {
         this.id = UUID.randomUUID().toString();
         this.personalName = personalName_;
         this.password = password_;
@@ -45,13 +45,13 @@ public class StudentInfo {
         this.email = email_;
     }
 
-    public StudentInfo(String studentId, String email){
+    public StudentInfo(String studentId, String email) {
         this.id = studentId;
         this.email = email;
     }
 
     public StudentInfo(String facultyId_, String chugId_, String maslulId_, String degree_, String year_, String beginYear_,
-                       String beginSemester_, ArrayList<String> courses_){
+                       String beginSemester_, ArrayList<String> courses_) {
         this.id = UUID.randomUUID().toString();
         this.facultyId = facultyId_;
         this.chugId = chugId_;
@@ -74,10 +74,11 @@ public class StudentInfo {
         this.year = year;
         this.id = id;
     }
+
     // FOR LOCAL DB CLASS
     public StudentInfo(String id_, String email_, String personalName_, String familyName_, String facultyId_,
                        String chugId_, String maslulId_, String degree_, String year_, String beginYear_, String beginSemester_,
-                       ArrayList<String> courses_){
+                       ArrayList<String> courses_) {
 
         this.personalName = personalName_;
         this.familyName = familyName_;
@@ -95,120 +96,122 @@ public class StudentInfo {
         this.plannedCourses = new ArrayList<>();
     }
 
-    public void setPersonalName(String name){
+    public void setPersonalName(String name) {
         this.personalName = name;
     }
 
-    public void setFamilyName(String name){
+    public void setFamilyName(String name) {
         this.familyName = name;
     }
 
-    public void setYear(String year){
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public void setDegree(String degreeName){
+    public void setDegree(String degreeName) {
         this.degree = degreeName;
     }
 
-    public void setBeginYear(String year_){
+    public void setBeginYear(String year_) {
         this.beginYear = year_;
     }
 
-    public void setBeginSemester(String beginSemester_){
+    public void setBeginSemester(String beginSemester_) {
         this.beginSemester = beginSemester_;
     }
 
-    public void setCourses(ArrayList<String> courses){
+    public void setCourses(ArrayList<String> courses) {
         this.courses = new ArrayList<>(courses);
     }
 
-    public void setCoursesGrades(HashMap<String, String> coursesGrades){
+    public void setCoursesGrades(HashMap<String, String> coursesGrades) {
         this.coursesGrades = new HashMap<>(coursesGrades);
     }
 
-    public void setPlanned(ArrayList<String> list){
+    public void setPlanned(ArrayList<String> list) {
         this.plannedCourses = new ArrayList<>(list);
     }
 
-    public ArrayList<String> getPlanned(){
+    public ArrayList<String> getPlanned() {
         return new ArrayList(this.plannedCourses);
     }
 
-    public HashMap<String, String> getCoursesGrades(){
+    public HashMap<String, String> getCoursesGrades() {
         return new HashMap<>(this.coursesGrades);
     }
 
-    public ArrayList<String> getCourses(){
+    public ArrayList<String> getCourses() {
         return new ArrayList<>(this.courses);
     }
 
-    public void setFacultyId(String facultyId_){
+    public void setFacultyId(String facultyId_) {
         this.facultyId = facultyId_;
     }
 
-    public void setChugId(String chugId_){
+    public void setChugId(String chugId_) {
         this.chugId = chugId_;
     }
 
-    public void setMaslulId(String maslulId_){
+    public void setMaslulId(String maslulId_) {
         this.maslulId = maslulId_;
     }
 
-    public String toStringP(){
+    public String toStringP() {
         return " personal name: " + personalName + " family name: " + familyName + " email: " + email + " faculty id: " +
                 facultyId + "chug id: " + chugId + " maslulId: " + maslulId + " degree: " + degree + " year: " + year +
                 " begin year: " + beginYear + " begin semester: " + beginSemester;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public String getPersonalName(){
+    public String getPersonalName() {
         return personalName;
     }
 
-    public String getFamilyName(){
+    public String getFamilyName() {
         return familyName;
     }
 
-    public String getFacultyId(){
+    public String getFacultyId() {
         return facultyId;
     }
 
-    public String getChugId(){
+    public String getChugId() {
         return chugId;
     }
 
-    public String getMaslulId(){
+    public String getMaslulId() {
         return maslulId;
     }
 
-    public String getDegree(){
+    public String getDegree() {
         return degree;
     }
 
-    public String getYear(){
+    public String getYear() {
         return year;
     }
 
-    public String getBeginYear(){
+    public String getBeginYear() {
         return beginYear;
     }
 
-    public String getBeginSemester(){
+    public String getBeginSemester() {
         return beginSemester;
     }
 
-    public String getId(){ return id;}
+    public String getId() {
+        return id;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    public void printCourses(){
-        for (String id: this.courses){
+    public void printCourses() {
+        for (String id : this.courses) {
         }
     }
 
@@ -220,41 +223,41 @@ public class StudentInfo {
         this.schedulePlannedByStudent = schedulePlannedByStudent;
     }
 
-    public void addScheduleEntry(CourseScheduleEntry entry){
+    public void addScheduleEntry(CourseScheduleEntry entry) {
         this.schedulePlannedByStudent.add(entry);
     }
 
-    public void removeScheduleEntry(CourseScheduleEntry entry){
+    public void removeScheduleEntry(CourseScheduleEntry entry) {
         if (this.schedulePlannedByStudent.contains(entry)) {
             this.schedulePlannedByStudent.remove(entry);
         }
     }
 
-   // public ArrayList<String> getCoursesPlannedByStudent() {
-     //   return plannedCourses;
-   // }
+    // public ArrayList<String> getCoursesPlannedByStudent() {
+    //   return plannedCourses;
+    // }
 
-   // public void setCoursesPlannedByStudent(ArrayList<String> coursesPlannedByStudent) {
-     //   System.out.println("nn" + coursesPlannedByStudent);
-      //  this.plannedCourses = new ArrayList<>(coursesPlannedByStudent);
-  //  }
+    // public void setCoursesPlannedByStudent(ArrayList<String> coursesPlannedByStudent) {
+    //   System.out.println("nn" + coursesPlannedByStudent);
+    //  this.plannedCourses = new ArrayList<>(coursesPlannedByStudent);
+    //  }
 
     //public void addCoursePlannedByStudent(String courseId){
-     //   this.coursesPlannedByStudent.add(courseId);
-   // }
-   // public void updateCoursePlannedByStudentList(String courseId){
-      //  if (coursesPlannedByStudent.contains(courseId)){
+    //   this.coursesPlannedByStudent.add(courseId);
+    // }
+    // public void updateCoursePlannedByStudentList(String courseId){
+    //  if (coursesPlannedByStudent.contains(courseId)){
 
-        //    this.coursesPlannedByStudent.add(courseId);
-       // }else {
+    //    this.coursesPlannedByStudent.add(courseId);
+    // }else {
 
-      //      this.coursesPlannedByStudent.remove(courseId);
-      //  }
-   // }
+    //      this.coursesPlannedByStudent.remove(courseId);
+    //  }
+    // }
 
-   // public void removeCoursePlannedByStudent(String courseId){
-     //   if (this.coursesPlannedByStudent.contains(courseId)){
-   //        this.coursesPlannedByStudent.remove(courseId);
-     //   }
+    // public void removeCoursePlannedByStudent(String courseId){
+    //   if (this.coursesPlannedByStudent.contains(courseId)){
+    //        this.coursesPlannedByStudent.remove(courseId);
+    //   }
     //}
 }

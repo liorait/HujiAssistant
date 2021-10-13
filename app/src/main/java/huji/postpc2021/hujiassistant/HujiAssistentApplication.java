@@ -23,6 +23,7 @@ public class HujiAssistentApplication extends Application {
     private SharedPreferences sp;
     private static HujiAssistentApplication instance = null;
     private RequestQueue mRequestQueue;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onCreate() {
@@ -43,7 +44,9 @@ public class HujiAssistentApplication extends Application {
 
         return mRequestQueue;
     }
+
     String TAG = "TAG";
+
     public <T> void addToRequestQueue(Request<T> req, String tag) {
         // set the default tag if tag is empty
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
@@ -61,14 +64,15 @@ public class HujiAssistentApplication extends Application {
         }
     }
 
-    public LocalDataBase getDataBase(){
+    public LocalDataBase getDataBase() {
         return dataBase;
     }
-    public static HujiAssistentApplication getInstance(){
+
+    public static HujiAssistentApplication getInstance() {
         return instance;
     }
 
-    UUID getWorkerId(){
+    UUID getWorkerId() {
         return id;
     }
 

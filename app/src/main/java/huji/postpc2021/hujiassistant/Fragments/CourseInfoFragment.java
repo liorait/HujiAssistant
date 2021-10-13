@@ -1,7 +1,7 @@
 package huji.postpc2021.hujiassistant.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -169,13 +169,13 @@ public class CourseInfoFragment extends Fragment {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             noKdamCoursesTextView.setVisibility(View.VISIBLE);
-                            Log.i("ERROR", "failed to get kdam courses");
+//                            Log.i("ERROR", "failed to get kdam courses");
                         }
                     });
         }
         catch (Exception e){
             noKdamCoursesTextView.setVisibility(View.VISIBLE);
-            Log.i("ERROR", "failed to get kdam courses");
+//            Log.i("ERROR", "failed to get kdam courses");
         }
     }
 
@@ -214,13 +214,13 @@ public class CourseInfoFragment extends Fragment {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             noAfterCoursesTextView.setVisibility(View.VISIBLE);
-                            Log.i("ERROR", "failed to get after courses");
+//                            Log.i("ERROR", "failed to get after courses");
                         }
                     });
         }
         catch (Exception e){
             noAfterCoursesTextView.setVisibility(View.VISIBLE);
-            Log.i("ERROR", "failed to get after courses");
+//            Log.i("ERROR", "failed to get after courses");
         }
     }
 }

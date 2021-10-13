@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import huji.postpc2021.hujiassistant.R;
 import huji.postpc2021.hujiassistant.ShowAttendanceAdapter;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -71,12 +72,12 @@ public class ShowAttendanceActivity extends AppCompatActivity {
         int stage = adapter.getStage();
         String savedCourseDocument = adapter.getSavedCourseDocument();
 
-        if (stage == COURSES_PREVIEW){
+        if (stage == COURSES_PREVIEW) {
             startActivity(new Intent(ShowAttendanceActivity.this, MainScreenActivity.class));
             finish();
         }
         // Go back to courses preview
-        else if (stage == YEAR_PREVIEW){
+        else if (stage == YEAR_PREVIEW) {
             adapter = new ShowAttendanceAdapter(this, courses, COURSES_PREVIEW, "");
             recyclerView.setAdapter(adapter);
             courses = new ArrayList<>();
@@ -94,8 +95,8 @@ public class ShowAttendanceActivity extends AppCompatActivity {
             });
         }
         // Go back to years preview
-        else if (stage == IMAGES_PREVIEW){
-            String year =  new SimpleDateFormat("yyyy").format(new Date());
+        else if (stage == IMAGES_PREVIEW) {
+            String year = new SimpleDateFormat("yyyy").format(new Date());
             adapter = new ShowAttendanceAdapter(this, courses, YEAR_PREVIEW, savedCourseDocument);
             recyclerView.setAdapter(adapter);
             courses = new ArrayList<>();

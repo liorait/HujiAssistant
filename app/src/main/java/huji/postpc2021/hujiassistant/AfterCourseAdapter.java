@@ -13,23 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AfterCourseAdapter extends RecyclerView.Adapter<AfterCourseItemHolder>{
+public class AfterCourseAdapter extends RecyclerView.Adapter<AfterCourseItemHolder> {
 
     private ArrayList<KdamOrAfterCourse> list;
     private Context mContext;
 
-    public AfterCourseAdapter(Context context){
+    public AfterCourseAdapter(Context context) {
         this.list = new ArrayList<>();
         this.mContext = context;
     }
 
-    public void addKdamCoursesListToAdapter(ArrayList<KdamOrAfterCourse> newList){
+    public void addKdamCoursesListToAdapter(ArrayList<KdamOrAfterCourse> newList) {
         this.list.clear();
         this.list.addAll(newList);
         notifyDataSetChanged();
     }
 
-    public void removeCourseFromAdapter(KdamOrAfterCourse course){
+    public void removeCourseFromAdapter(KdamOrAfterCourse course) {
         this.list.remove(course);
         notifyDataSetChanged();
     }
@@ -48,16 +48,16 @@ public class AfterCourseAdapter extends RecyclerView.Adapter<AfterCourseItemHold
 
 
     // Create an interface
-    public interface DeleteClickListener{
+    public interface DeleteClickListener {
         void onDeleteClick(View v, Course item);
     }
 
     // Create an interface
-    public interface CancelClickListener{
+    public interface CancelClickListener {
         void onCancelClick(Course item);
     }
 
-    public interface OnCheckBoxClickListener{
+    public interface OnCheckBoxClickListener {
         void onCheckBoxClicked(View v, Course item);
     }
 
@@ -65,15 +65,15 @@ public class AfterCourseAdapter extends RecyclerView.Adapter<AfterCourseItemHold
         public void onClick(Course item);
     }
 
-    public void setItemClickListener(huji.postpc2021.hujiassistant.CoursesAdapter.OnItemClickListener listener){
+    public void setItemClickListener(huji.postpc2021.hujiassistant.CoursesAdapter.OnItemClickListener listener) {
         this.itemClickListener = listener;
     }
 
-    public void setItemCheckBoxListener(huji.postpc2021.hujiassistant.CoursesAdapter.OnCheckBoxClickListener listener){
+    public void setItemCheckBoxListener(huji.postpc2021.hujiassistant.CoursesAdapter.OnCheckBoxClickListener listener) {
         this.checkBoxClickListener = listener;
     }
 
-    public void setDeleteListener(huji.postpc2021.hujiassistant.CoursesAdapter.DeleteClickListener listener){
+    public void setDeleteListener(huji.postpc2021.hujiassistant.CoursesAdapter.DeleteClickListener listener) {
         this.deleteListener = listener;
     }
 
@@ -84,7 +84,7 @@ public class AfterCourseAdapter extends RecyclerView.Adapter<AfterCourseItemHold
         KdamOrAfterCourse courseItem = this.list.get(position);
         holder.name.setText(courseItem.getName());
         holder.number.setText(courseItem.getNumber());
-        String semesterText = " סמסטר " + courseItem.getSemester()  ;
+        String semesterText = " סמסטר " + courseItem.getSemester();
         holder.semester.setText(semesterText);
         String text = courseItem.getPoints() + " נ''ז ";
         holder.points.setText(text);
@@ -95,7 +95,7 @@ public class AfterCourseAdapter extends RecyclerView.Adapter<AfterCourseItemHold
         return this.list.size();
     }
 
-    public ArrayList<KdamOrAfterCourse> getItems(){
+    public ArrayList<KdamOrAfterCourse> getItems() {
         return list;
     }
 
