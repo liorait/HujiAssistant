@@ -85,6 +85,8 @@
     <string name="schedule_plan">לוח זמנים</string>
     <string name="planning_courses_title">תכנון קורסים</string>
     <string name="semester">סמסטר</string>
+    <string name="ask_for_permissions">אשר הרשאות</string>
+    <string name="permissions_error">ההרשאות נדרשות על-מנת להפעיל את האפליקציה</string>
 
     <string name="infofragment_facultyhint">בחר פקולטה/בית ספר</string>
     <string name="infofragment_chughint">בחר חוג</string>

@@ -69,6 +69,8 @@
     <string name="nameOfMaslulMyCoursesScreen">Name of sub-department: </string>
     <string name="degreeTypeMyCoursesScreen">First / advanced degree: </string>
     <string name="yearOfDegreeMyCoursesScreen">Year of degree: </string>
+    <string name="ask_for_permissions">Approve permissions</string>
+    <string name="permissions_error">Permissions are required to run the app</string>
 
 
 

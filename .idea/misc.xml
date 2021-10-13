@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/activity_main_pdf.xml" value="0.1234375" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/activity_pdf.xml" value="0.1234375" />
+        <entry key="app/src/main/res/layout/activity_permissions.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_profile_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_scan_qr.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/activity_show.xml" value="0.1956521739130435" />

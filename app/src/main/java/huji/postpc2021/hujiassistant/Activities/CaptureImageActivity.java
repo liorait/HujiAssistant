@@ -1,13 +1,11 @@
 
 package huji.postpc2021.hujiassistant.Activities;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,8 +28,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import huji.postpc2021.hujiassistant.HujiAssistentApplication;
@@ -127,7 +123,7 @@ public class CaptureImageActivity extends AppCompatActivity {
         cameraImageUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                askCameraPermissions();
+                dispatchTakePictureIntent();
             }
         });
 
@@ -314,14 +310,6 @@ public class CaptureImageActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cr.getType(mUri));
     }
 
-    private void askCameraPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        } else {
-            dispatchTakePictureIntent();
-        }
-    }
-
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -336,7 +324,7 @@ public class CaptureImageActivity extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "huji.postpc2021.hujiassistant.Activities.fileprovider",
+                        "huji.postpc2021.hujiassistant.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 cameraUploadActivityResultLauncher.launch(takePictureIntent);
@@ -362,31 +350,6 @@ public class CaptureImageActivity extends AppCompatActivity {
 
         currentPhotoPath = image.getAbsolutePath();
         return image;
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("imageTitle", imageTitle.getText().toString());
-        outState.putParcelable("imageUri", imageUri);
-        outState.putInt("progressBarVisibility", progressBar.getVisibility());
-        outState.putInt("cameraUploadVisibility", cameraImageUpload.getVisibility());
-        outState.putInt("pdfImageVisibility", pdfImageUpload.getVisibility());
-        outState.putInt("imageShowVisibility", imageShow.getVisibility());
-        outState.putString("pdfNameText", pdfName.getText().toString());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        imageTitle.setText(savedInstanceState.getString("imageTitle"));
-        imageUri = savedInstanceState.getParcelable("imageUri");
-        imageShow.setImageURI(imageUri);
-        progressBar.setVisibility(savedInstanceState.getInt("progressBarVisibility"));
-        cameraImageUpload.setVisibility(savedInstanceState.getInt("cameraUploadVisibility"));
-        pdfImageUpload.setVisibility(savedInstanceState.getInt("pdfImageVisibility"));
-        imageShow.setVisibility(savedInstanceState.getInt("imageShowVisibility"));
-        pdfName.setText(savedInstanceState.getString("pdfNameText"));
     }
 
     private void hideButtonsAfterChooseImage() {

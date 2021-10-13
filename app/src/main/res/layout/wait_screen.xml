@@ -54,4 +54,15 @@
         app:layout_constraintTop_toBottomOf="@+id/logo_wait_screen"
         app:layout_constraintVertical_bias="0.208" />
 
+    <Button
+        android:id="@+id/ask_permissions_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ask_for_permissions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.582" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
