@@ -117,8 +117,7 @@ public class InfoFragment extends Fragment {
         textView.setVisibility(View.INVISIBLE);
 
         // Get values recourse
-      //  String[] facultyArray = getResources().getStringArray(R.array.faculty);
-        String[] facultyArray2 = {"ביה\"ס להנדסה ולמדעי המחשב"};
+        String[] facultyArray2 = {getResources().getString(R.string.facultyCS)};
 
         // Get items to show in drop down faculty
         ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, facultyArray2);
@@ -161,10 +160,9 @@ public class InfoFragment extends Fragment {
         if (dataBase == null) {
             dataBase = HujiAssistentApplication.getInstance().getDataBase();
         }
-       // String[] facultyArray = getResources().getStringArray(R.array.faculty);
-        // Get items to show in drop down faculty
 
-        String[] facultyArray2 = {"ביה\"ס להנדסה ולמדעי המחשב"};
+        // Get items to show in drop down faculty
+        String[] facultyArray2 = {getResources().getString(R.string.facultyCS)};
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, facultyArray2);
         arrayAdapter.getFilter().filter("");
@@ -421,7 +419,8 @@ public class InfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.faculty));
+        String[] facultyArray2 = {getResources().getString(R.string.facultyCS)};
+        ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, facultyArray2);
         arrayAdapter.getFilter().filter("");
         binding.autoCompleteTextViewFaculty.setAdapter(arrayAdapter);
 

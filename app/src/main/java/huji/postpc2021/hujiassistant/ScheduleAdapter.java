@@ -51,8 +51,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleItemHolder> {
         holder.type.setText(scheduleEntry.getType());
         holder.time.setText(hours);
 
-
-        //TODO: no chceck box in this version, maybe in next one
 //        holder.checkBox.setOnClickListener(v -> {
 //            System.out.println("check box clicked");
 //            if (holder.checkBox.isChecked()){

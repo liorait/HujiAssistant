@@ -264,6 +264,8 @@
     <string name="enteramail">הקלד כתובת דואר אלקטרוני לשליחה. ניתן להקליד מספר כתובות, יש להפריד ביניהן בעזרת פסיק</string>
     <string name="sendmailbtn">שליחה</string>
 
+
+
     <string name="facultyCS">ביה"ס להנדסה ולמדעי המחשב</string>
     <string-array name="faculty">
         <item value="01">הפקולטה למדעי הרוח</item>

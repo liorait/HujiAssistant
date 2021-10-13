@@ -100,7 +100,7 @@ public class CoursesFragment extends Fragment {
     // FirebaseFirestore firebaseInstancedb = HujiAssistentApplication.getInstance().getDataBase().getFirestoreDB();
     FirebaseFirestore firebaseInstancedb = FirebaseFirestore.getInstance();
 
-    ArrayList<String> coursesOfStudent = new ArrayList<>(); // todo save in db to pass between activities
+    ArrayList<String> coursesOfStudent = new ArrayList<>();
 
     public CoursesFragment.endRegistrationButtonClickListener endRegistrationBtnListener = null;
     public CoursesAdapter.OnItemClickListener onItemClickListener = null;
@@ -418,7 +418,7 @@ public class CoursesFragment extends Fragment {
 
                                     } else {
 //                                        Log.w("RegisterActivity", "registerWithEmail:failure", task.getException());
-                                        Toast.makeText(getActivity(), R.string.register_failed_message, Toast.LENGTH_LONG).show();                                            //todo: don't allow to continue
+                                        Toast.makeText(getActivity(), R.string.register_failed_message, Toast.LENGTH_LONG).show();
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
