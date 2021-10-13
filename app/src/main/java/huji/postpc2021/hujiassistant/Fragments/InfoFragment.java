@@ -24,7 +24,9 @@ import huji.postpc2021.hujiassistant.R;
 import huji.postpc2021.hujiassistant.StudentInfo;
 import huji.postpc2021.hujiassistant.ViewModelApp;
 import huji.postpc2021.hujiassistant.databinding.FragmentInfoBinding;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,14 +43,14 @@ import java.util.List;
  */
 public class InfoFragment extends Fragment {
 
-    public InfoFragment(){
+    public InfoFragment() {
         super(R.layout.fragment_info);
     }
 
     FirebaseFirestore firebaseInstancedb = FirebaseFirestore.getInstance();
 
     /* On item selected in faculty auto complete text listener*/
-    public interface itemSelectedDropDownFaculty{
+    public interface itemSelectedDropDownFaculty {
         public void onFacultyItemSelected();
     }
 
@@ -82,7 +84,8 @@ public class InfoFragment extends Fragment {
     boolean isChugValid = false;
     boolean isMaslulValid = false;
     public LocalDataBase dataBase;
-    public interface continueButtonClickListener{
+
+    public interface continueButtonClickListener {
         public void continueBtnClicked();
     }
 
@@ -126,27 +129,24 @@ public class InfoFragment extends Fragment {
     public InfoFragment.continueButtonClickListener continueListener = null;
 
     /* Checks validation for the fields in the screen */
-    private void checkValidation(){
+    private void checkValidation() {
 
         // Check fields not empty
         if (dropdownFaculty.getText().toString().isEmpty()) {
             Toast.makeText(getActivity(), getResources().getString(R.string.please_enter_faculty_msg), Toast.LENGTH_LONG).show();
             isFacultyValid = false;
-        }
-        else {
+        } else {
             isFacultyValid = true;
             if (dropdownHugim.getText().toString().isEmpty()) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.please_enter_chug_msg), Toast.LENGTH_LONG).show();
                 isChugValid = false;
-            }
-            else{
+            } else {
                 isChugValid = true;
 
-                if (dropdownMaslulim.getText().toString().isEmpty()){
+                if (dropdownMaslulim.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.please_enter_maslul_msg), Toast.LENGTH_LONG).show();
                     isMaslulValid = false;
-                }
-                else{
+                } else {
                     isMaslulValid = true;
                 }
             }
@@ -157,7 +157,7 @@ public class InfoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // db
-        if (dataBase == null){
+        if (dataBase == null) {
             dataBase = HujiAssistentApplication.getInstance().getDataBase();
         }
         String[] facultyArray = getResources().getStringArray(R.array.faculty);
@@ -191,12 +191,12 @@ public class InfoFragment extends Fragment {
 
         viewModelApp = new ViewModelProvider(requireActivity()).get(ViewModelApp.class);
 
-        viewModelApp.getStudent().observe(getViewLifecycleOwner(), item-> {
-                    personalName = item.getPersonalName();
-                    familyName = item.getFamilyName();
-                    email = item.getEmail();
-                    currentStudent = viewModelApp.getStudent().getValue();
-                });
+        viewModelApp.getStudent().observe(getViewLifecycleOwner(), item -> {
+            personalName = item.getPersonalName();
+            familyName = item.getFamilyName();
+            email = item.getEmail();
+            currentStudent = viewModelApp.getStudent().getValue();
+        });
 
         view.findViewById(R.id.continuePersBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,25 +210,46 @@ public class InfoFragment extends Fragment {
                         currentStudent.setChugId(chugId);
                         currentStudent.setMaslulId(maslulId);
 
-                        if (!dropdowndegree.getText().toString().isEmpty()){
+                        if (!dropdowndegree.getText().toString().isEmpty()) {
                             selectedDegree = dropdowndegree.getText().toString();
                             currentStudent.setDegree(selectedDegree);
                         }
-                        if (!dropdownYear.getText().toString().isEmpty()){
+                        if (!dropdownYear.getText().toString().isEmpty()) {
                             selectedYear = dropdownYear.getText().toString();
                             currentStudent.setYear(selectedYear);
                         }
-                        if (!dropdownyearbegindegree.getText().toString().isEmpty()){
+                        if (!dropdownyearbegindegree.getText().toString().isEmpty()) {
                             selectedBeginYear = dropdownyearbegindegree.getText().toString();
                             currentStudent.setBeginYear(selectedBeginYear);
                         }
-                        if (!dropdownsemesterbegindegree.getText().toString().isEmpty()){
+                        if (!dropdownsemesterbegindegree.getText().toString().isEmpty()) {
                             selectedBeginSemester = dropdownsemesterbegindegree.getText().toString();
                             currentStudent.setBeginSemester(selectedBeginSemester);
                         }
 
-                        viewModelApp.setStudent(currentStudent);
-                        continueListener.continueBtnClicked();
+
+                        firebaseInstancedb.collection("coursesTestOnlyCs").whereEqualTo("chugId", chugId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot chugQueryDocumentSnapshots) {
+                                if (!chugQueryDocumentSnapshots.isEmpty()) {
+                                    firebaseInstancedb.collection("coursesTestOnlyCs").document(chugId).collection("maslulimInChug").whereEqualTo("id", maslulId).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onSuccess(QuerySnapshot maslulQueryDocumentSnapshots) {
+                                            if (!maslulQueryDocumentSnapshots.isEmpty()) {
+                                                viewModelApp.setStudent(currentStudent);
+                                                continueListener.continueBtnClicked();
+                                            } else {
+                                                Toast.makeText(getContext(), "We're sorry, The Maslul" + dropdownMaslulim.getText().toString() + " is not in our Database yet", Toast.LENGTH_LONG).show();
+
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(getContext(), "We're sorry, The Chug " + dropdownHugim.getText().toString() + " is not in our Database yet", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
                     }
                 }
             }
@@ -245,7 +266,7 @@ public class InfoFragment extends Fragment {
         dropdownFaculty.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String)parent.getItemAtPosition(position);
+                String selection = (String) parent.getItemAtPosition(position);
                 ArrayList<String> s = new ArrayList<>();
                 arrayAdapter.getFilter().filter("");
                 autoCompleteTextViewChug.setAdapter(new ArrayAdapter(requireContext(), R.layout.dropdownhujiitem, s));
@@ -263,9 +284,9 @@ public class InfoFragment extends Fragment {
                                 List<DocumentSnapshot> documents = task.getResult().getDocuments();
                                 ArrayList<String> chugimInFaculty = new ArrayList<>();
 
-                                for (DocumentSnapshot document1 : documents){
+                                for (DocumentSnapshot document1 : documents) {
                                     // retrieve for each chug id it's name
-                                    String docId  = document1.getId().toString();
+                                    String docId = document1.getId().toString();
                                     Chug chug = document1.toObject(Chug.class);
                                     String chugTitle = chug.getTitle();
                                     chugimInFaculty.add(chugTitle);
@@ -281,7 +302,7 @@ public class InfoFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 progressBar.setVisibility(View.VISIBLE);
-                String selection = (String)parent.getItemAtPosition(position);
+                String selection = (String) parent.getItemAtPosition(position);
                 ArrayList<String> s = new ArrayList<>();
                 arrayAdapter.getFilter().filter("");
                 autoCompleteTextViewMaslul.setAdapter(new ArrayAdapter(requireContext(), R.layout.dropdownmaslulitem, s));
@@ -297,7 +318,7 @@ public class InfoFragment extends Fragment {
                                 autoCompleteTextViewMaslul.setEnabled(true);
                                 List<DocumentSnapshot> documents = task.getResult().getDocuments();
 
-                                for (DocumentSnapshot document1 : documents){
+                                for (DocumentSnapshot document1 : documents) {
                                     // retrieve for each chug id it's name
                                     Chug chug = document1.toObject(Chug.class);
                                     chugId = chug.getId();
@@ -310,7 +331,7 @@ public class InfoFragment extends Fragment {
                                                     List<DocumentSnapshot> documents1 = task.getResult().getDocuments();
                                                     ArrayList<String> maslulimInFaculty = new ArrayList<>();
 
-                                                    for (DocumentSnapshot document2 : documents1){
+                                                    for (DocumentSnapshot document2 : documents1) {
                                                         Maslul maslul = document2.toObject(Maslul.class);
                                                         String maslulTitle = maslul.getTitle();
                                                         maslulimInFaculty.add(maslulTitle);
@@ -392,5 +413,22 @@ public class InfoFragment extends Fragment {
                 selectedBeginSemester = (String) parent.getItemAtPosition(position);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, getResources().getStringArray(R.array.faculty));
+        arrayAdapter.getFilter().filter("");
+        binding.autoCompleteTextViewFaculty.setAdapter(arrayAdapter);
+
+        String[] beginSemesterArray = getResources().getStringArray(R.array.beginsemesterarray);
+        binding.autoCompleteSemesterBeginDegree.setAdapter(new ArrayAdapter(requireContext(), R.layout.dropdownbeginsemesteritem, beginSemesterArray));
+        arrayAdapter.getFilter().filter("");
+
+        String[] beginYearArray = getResources().getStringArray(R.array.beginyeararray);
+        binding.autoCompleteYearBeginDegree.setAdapter(new ArrayAdapter(requireContext(), R.layout.dropdownbeginyearitem, beginYearArray));
+        arrayAdapter.getFilter().filter("");
+
     }
 }
