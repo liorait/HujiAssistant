@@ -91,19 +91,19 @@ public class InfoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // return super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentInfoBinding.inflate(inflater, container, false);
-        faculties_position_map.put(0, "01");
-        faculties_position_map.put(1, "02");
-        faculties_position_map.put(2, "03");
-        faculties_position_map.put(3, "04");
-        faculties_position_map.put(4, "05");
-        faculties_position_map.put(5, "06");
-        faculties_position_map.put(6, "07");
-        faculties_position_map.put(7, "08");
-        faculties_position_map.put(8, "09");
-        faculties_position_map.put(9, "11");
-        faculties_position_map.put(10, "12");
-        faculties_position_map.put(11, "16");
-        faculties_position_map.put(12, "30");
+      //  faculties_position_map.put(0, "01");
+       // faculties_position_map.put(1, "02");
+       // faculties_position_map.put(2, "03");
+      //  faculties_position_map.put(3, "04");
+       // faculties_position_map.put(4, "05");
+       // faculties_position_map.put(5, "06");
+       // faculties_position_map.put(6, "07");
+      //  faculties_position_map.put(7, "08");
+      //  faculties_position_map.put(8, "09");
+      //  faculties_position_map.put(9, "11");
+        faculties_position_map.put(0, "12");
+        //faculties_position_map.put(11, "16");
+       // faculties_position_map.put(12, "30");
 
         settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
@@ -114,10 +114,11 @@ public class InfoFragment extends Fragment {
         textView.setVisibility(View.INVISIBLE);
 
         // Get values recourse
-        String[] facultyArray = getResources().getStringArray(R.array.faculty);
+      //  String[] facultyArray = getResources().getStringArray(R.array.faculty);
+        String[] facultyArray2 = {"ביה\"ס להנדסה ולמדעי המחשב"};
 
         // Get items to show in drop down faculty
-        ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, facultyArray);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, facultyArray2);
         arrayAdapter.getFilter().filter("");
         binding.autoCompleteTextViewFaculty.setAdapter(arrayAdapter);
         return binding.getRoot();
@@ -160,10 +161,12 @@ public class InfoFragment extends Fragment {
         if (dataBase == null){
             dataBase = HujiAssistentApplication.getInstance().getDataBase();
         }
-        String[] facultyArray = getResources().getStringArray(R.array.faculty);
+       // String[] facultyArray = getResources().getStringArray(R.array.faculty);
         // Get items to show in drop down faculty
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, facultyArray);
+        String[] facultyArray2 = {"ביה\"ס להנדסה ולמדעי המחשב"};
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.dropdownfacultyitem, facultyArray2);
         arrayAdapter.getFilter().filter("");
         binding.autoCompleteTextViewFaculty.setAdapter(arrayAdapter);
 

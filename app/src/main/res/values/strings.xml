@@ -113,7 +113,6 @@
     <string name="email_field">כתובת מייל</string>
     <string name="user_first_name_field">שם פרטי</string>
     <string name="user_last_name_field">שם משפחה</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="register1out3">מסך הרשמה למערכת - שלב 1 מתוך 3</string>
@@ -195,8 +194,6 @@
         <item value="05">קורס שנתי</item>
     </string-array>
 
-
-
     <string-array name="yearArray">
         <item value="01">הכל</item>
         <item value="02">שנה א</item>
@@ -216,9 +213,6 @@
         <item value="7">6 נקודות זכות</item>
         <item value="8">7+ נקודות זכות</item>
     </string-array>
-
-
-
 
     <string-array name="beginsemesterarray">
         <item value="1">סמסטר א</item>
@@ -270,7 +264,7 @@
     <string name="enteramail">הקלד כתובת דואר אלקטרוני לשליחה. ניתן להקליד מספר כתובות, יש להפריד ביניהן בעזרת פסיק</string>
     <string name="sendmailbtn">שליחה</string>
 
-
+    <string name="facultyCS">ביה"ס להנדסה ולמדעי המחשב</string>
     <string-array name="faculty">
         <item value="01">הפקולטה למדעי הרוח</item>
         <item number="02">הפקולטה למדעי הטבע</item>

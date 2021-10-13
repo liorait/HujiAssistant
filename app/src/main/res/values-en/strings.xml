@@ -157,13 +157,14 @@
         <item value="1">סמסטר א</item>
         <item value="2">סמסטר ב</item>
     </string-array>
-
+    <string name="facultyCS">ביה"ס להנדסה ולמדעי המחשב</string>
     <string-array name="yearArray">
         <item value="01">שנה א</item>
         <item value="02">שנה ב</item>
         <item value="03">שנה ג</item>
         <item value="04">שנה ד</item>
         <item value="05">שנה ה</item>
+        <item value="06">שנה ו</item>
     </string-array>
 
     <string-array name="courseType">

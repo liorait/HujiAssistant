@@ -196,7 +196,7 @@ public class CourseInfoFragment extends Fragment {
                                 assert course != null;
                                 afterCourses.add(course);
                             }
-                            // todo change matod name
+
                             afterCoursesAdapter.addKdamCoursesListToAdapter(afterCourses);
                             recyclerViewAfterCourses.setAdapter(afterCoursesAdapter);
 
