@@ -324,7 +324,7 @@ public class CoursesFragment extends Fragment {
             public void onAddGradeClick(Course item, String grade) {
                 if (addGradeListener != null) {
                     viewModelAppCourse.set(item);
-                   // addGradeListener.onAddGradeClicked(item);
+                    // addGradeListener.onAddGradeClicked(item);
                 }
             }
         });
@@ -366,7 +366,7 @@ public class CoursesFragment extends Fragment {
                                 + item.getNumber() + " " + getActivity().getResources().getString(R.string.removed_from_the_list_of_courses);
                         Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                     }
-                   // printCourses();
+                    // printCourses();
                     onCheckBoxClickListener.onCheckBoxClicked(v, item);
                 }
             }
@@ -401,7 +401,7 @@ public class CoursesFragment extends Fragment {
                                         Toast.makeText(getActivity(), R.string.register_Successfully_message, Toast.LENGTH_LONG).show();
                                         FirebaseUser user = auth.getCurrentUser();
 
-                                      //  printCourses();
+                                        //  printCourses();
                                         assert user != null;
 
                                         StudentInfo newStudent = new StudentInfo(user.getUid(), email, personalName, familyName,
@@ -434,7 +434,7 @@ public class CoursesFragment extends Fragment {
 
     private void printCourses() {
         for (int i = 0; i < coursesOfStudent.size(); i++) {
-           // System.out.println(coursesOfStudent.get(i));
+            // System.out.println(coursesOfStudent.get(i));
         }
     }
 }
