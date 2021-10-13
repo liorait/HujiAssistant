@@ -108,12 +108,9 @@ public class ScanQrActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mCodeScanner.isPreviewActive()) {
-            mCodeScanner.stopPreview();
-        } else {
-            startActivity(new Intent(this, MainScreenActivity.class));
-            finish();
-        }
+        mCodeScanner.stopPreview();
+        startActivity(new Intent(this, MainScreenActivity.class));
+        finish();
     }
 
     public boolean isCodeScannerActive() {

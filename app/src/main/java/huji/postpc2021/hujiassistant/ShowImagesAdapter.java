@@ -53,13 +53,7 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v;
-
-        if (stage == IMAGES_PREVIEW) {
-            v = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
-        } else {
-            v = LayoutInflater.from(context).inflate(R.layout.model_pdf, parent, false);
-        }
+        View v = LayoutInflater.from(context).inflate(R.layout.model_pdf, parent, false);
         return new MyViewHolder(v);
     }
 
@@ -77,82 +71,14 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.My
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (stage == COURSES_PREVIEW) {
-                    savedCourse = holder.imageTitle.getText().toString();
-                    String path = IMAGES_COLLECTION_NAME + "/" + savedCourse;
-                    root = FirebaseDatabase.getInstance().getReference(path);
+                clickingOnImageOrTitle(holder, position);
+            }
+        });
 
-                    root.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                String course = dataSnapshot.getKey();
-                                dataImages.add(new Model("", course, 0));
-                            }
-                            swapImages(dataImages);
-                            stage = YEAR_PREVIEW;
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                } else if (stage == YEAR_PREVIEW) {
-                    savedDate = holder.imageTitle.getText().toString();
-                    String path = IMAGES_COLLECTION_NAME + "/" + savedCourse + "/" + savedDate;
-                    root = FirebaseDatabase.getInstance().getReference(path);
-
-                    root.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                Model model = dataSnapshot.getValue(Model.class);
-                                assert model != null;
-                                if (model.getType() != PDF_TYPE) {
-                                    model.setId(dataSnapshot.getKey());
-                                    dataImages.add(model);
-                                }
-                            }
-                            swapImages(dataImages);
-                            stage = IMAGES_PREVIEW;
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                } else if (stage == IMAGES_PREVIEW) {
-                    String path = IMAGES_COLLECTION_NAME + "/" + savedCourse + "/" + savedDate;
-
-                    root = FirebaseDatabase.getInstance().getReference(path);
-
-                    root.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                if (dataSnapshot.getKey().equals(mModels.get(position).getId())) {
-                                    Model model = dataSnapshot.getValue(Model.class);
-                                    assert model != null;
-                                    if (model.getType() != PDF_TYPE) {
-                                        PDFDoc pdfDoc = new PDFDoc();
-                                        pdfDoc.setName(model.getName());
-                                        pdfDoc.setPath(model.getImageUrl());
-                                        openPDFView(pdfDoc.getPath());
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
+        holder.imageTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickingOnImageOrTitle(holder, position);
             }
         });
     }
@@ -194,5 +120,84 @@ public class ShowImagesAdapter extends RecyclerView.Adapter<ShowImagesAdapter.My
         Intent i = new Intent(context, ImageActivity.class);
         i.putExtra("PATH", path);
         context.startActivity(i);
+    }
+
+    private void clickingOnImageOrTitle(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position){
+        if (stage == COURSES_PREVIEW) {
+            savedCourse = holder.imageTitle.getText().toString();
+            String path = IMAGES_COLLECTION_NAME + "/" + savedCourse;
+            root = FirebaseDatabase.getInstance().getReference(path);
+
+            root.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String course = dataSnapshot.getKey();
+                        dataImages.add(new Model("", course, 0));
+                    }
+                    swapImages(dataImages);
+                    stage = YEAR_PREVIEW;
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else if (stage == YEAR_PREVIEW) {
+            savedDate = holder.imageTitle.getText().toString();
+            String path = IMAGES_COLLECTION_NAME + "/" + savedCourse + "/" + savedDate;
+            root = FirebaseDatabase.getInstance().getReference(path);
+
+            root.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Model model = dataSnapshot.getValue(Model.class);
+                        assert model != null;
+                        if (model.getType() != PDF_TYPE) {
+                            model.setId(dataSnapshot.getKey());
+                            dataImages.add(model);
+                        }
+                    }
+                    swapImages(dataImages);
+                    stage = IMAGES_PREVIEW;
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else if (stage == IMAGES_PREVIEW) {
+            String path = IMAGES_COLLECTION_NAME + "/" + savedCourse + "/" + savedDate;
+
+            root = FirebaseDatabase.getInstance().getReference(path);
+
+            root.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (dataSnapshot.getKey().equals(mModels.get(position).getId())) {
+                            Model model = dataSnapshot.getValue(Model.class);
+                            assert model != null;
+                            if (model.getType() != PDF_TYPE) {
+                                PDFDoc pdfDoc = new PDFDoc();
+                                pdfDoc.setName(model.getName());
+                                pdfDoc.setPath(model.getImageUrl());
+                                openPDFView(pdfDoc.getPath());
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 }

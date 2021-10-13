@@ -66,7 +66,6 @@ public class CaptureImageActivity extends AppCompatActivity {
     Spinner dropdown;
     EditText imageTitle;
     String currentPhotoPath;
-    public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int DOCUMENTS_REQUEST_CODE = 104;
     public static final int GALLERY_REQUEST_CODE = 105;

@@ -1,5 +1,6 @@
 package huji.postpc2021.hujiassistant;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -54,7 +55,7 @@ public class ShowAttendanceAdapter extends RecyclerView.Adapter<ShowAttendanceAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String year = new SimpleDateFormat("yyyy").format(new Date());
         data = new ArrayList<>();
         holder.imageTitle.setText(mListCourses.get(position));
@@ -67,36 +68,14 @@ public class ShowAttendanceAdapter extends RecyclerView.Adapter<ShowAttendanceAd
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (stage == COURSES_PREVIEW) {
-                    savedCourseDocument = holder.imageTitle.getText().toString();
-                    firebaseInstancedb.collection(ATTENDANCE_COLLECTION_NAME).document(holder.imageTitle.getText().toString()).collection(year).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    data.add(document.getId());
-                                }
-                                swap(data);
-                            }
-                        }
-                    });
-                    stage = YEAR_PREVIEW;
-                } else if (stage == YEAR_PREVIEW) {
-                    savedDateDocument = holder.imageTitle.getText().toString();
-                    firebaseInstancedb.collection(ATTENDANCE_COLLECTION_NAME).document(savedCourseDocument).collection(year).document(holder.imageTitle.getText().toString()).collection(DUMMY_COLLECTION).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Map<String, Object> map = document.getData();
-                                    data.addAll(map.keySet());
-                                }
-                                swap(data);
-                            }
-                        }
-                    });
-                    stage = STUDENTS_PREVIEW;
-                }
+                clickingOmImageOrTitle(holder, position, year);
+            }
+        });
+
+        holder.imageTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickingOmImageOrTitle(holder, position, year);
             }
         });
     }
@@ -131,5 +110,38 @@ public class ShowAttendanceAdapter extends RecyclerView.Adapter<ShowAttendanceAd
 
     public String getSavedCourseDocument() {
         return this.savedCourseDocument;
+    }
+
+    private void clickingOmImageOrTitle(@NonNull MyViewHolder holder, int position, String year){
+        if (stage == COURSES_PREVIEW) {
+            savedCourseDocument = holder.imageTitle.getText().toString();
+            firebaseInstancedb.collection(ATTENDANCE_COLLECTION_NAME).document(holder.imageTitle.getText().toString()).collection(year).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            data.add(document.getId());
+                        }
+                        swap(data);
+                    }
+                }
+            });
+            stage = YEAR_PREVIEW;
+        } else if (stage == YEAR_PREVIEW) {
+            savedDateDocument = holder.imageTitle.getText().toString();
+            firebaseInstancedb.collection(ATTENDANCE_COLLECTION_NAME).document(savedCourseDocument).collection(year).document(holder.imageTitle.getText().toString()).collection(DUMMY_COLLECTION).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Map<String, Object> map = document.getData();
+                            data.addAll(map.keySet());
+                        }
+                        swap(data);
+                    }
+                }
+            });
+            stage = STUDENTS_PREVIEW;
+        }
     }
 }
