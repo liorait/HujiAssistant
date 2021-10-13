@@ -217,7 +217,7 @@
     <string name="infofragment_degreehint">Choose degree type</string>
     <string name="infofragment_degreeYearhint">Choose the year of degree</string>
     <string name="infofragment_degreeSemesterhint">Start semester</string>
-    <string name="infofragment_startYearhint">Start year of degree</string>
+    <string name="infofragment_startYearhint">Start year</string>
 
     <string name="courseinfonumber">Number of course:</string>
     <string name="courseinfoname">Name of course:</string>

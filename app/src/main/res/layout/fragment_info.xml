@@ -202,9 +202,8 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteYearBeginDegree"
-                    android:layout_width="160dp"
+                    android:layout_width="135dp"
                     android:layout_height="60dp"
-                    android:layout_marginLeft="18dp"
                     android:layout_marginRight="12dp"
                     android:layout_weight="1"
                     android:background="@color/white"

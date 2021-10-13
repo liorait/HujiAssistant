@@ -94,7 +94,7 @@
     <string name="infofragment_degreehint">בחר תואר</string>
     <string name="infofragment_degreeYearhint">בחר שנה לתואר</string>
     <string name="infofragment_degreeSemesterhint">סמסטר התחלה</string>
-    <string name="infofragment_startYearhint">שנת התחלת התואר</string>
+    <string name="infofragment_startYearhint">שנת התחלה</string>
 
     <string name="hellomail">שלום! החבר שלך</string>
     <string name="invitationmail">רוצה להזמין אותך להצטרף לאפליקציה</string>
@@ -197,12 +197,12 @@
     </string-array>
 
     <string-array name="yearArray">
-        <item value="01">הכל</item>
-        <item value="02">שנה א</item>
-        <item value="03">שנה ב</item>
-        <item value="04">שנה ג</item>
-        <item value="05">שנה ד</item>
-        <item value="06">שנה ה</item>
+        <item value="01">שנה א</item>
+        <item value="02">שנה ב</item>
+        <item value="03">שנה ג</item>
+        <item value="04">שנה ד</item>
+        <item value="05">שנה ה</item>
+        <item value="06">שנה ו</item>
     </string-array>
 
     <string-array name="pointsArray">
